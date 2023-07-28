@@ -1,17 +1,17 @@
-import { useEffect } from "react";
-import { startGetUserBooking } from "../../Actions/bookingAction";
-import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react"
+import { startGetUserBooking } from "../../Actions/bookingAction"
+import { useDispatch, useSelector } from "react-redux"
 
 const History = () => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
 
   useEffect(() => {
-    dispatch(startGetUserBooking());
-  }, [dispatch]);
+    dispatch(startGetUserBooking())
+  }, [dispatch])
 
   const bookings = useSelector((state) => {
-    return state.booking.data;
-  });
+    return state.booking.data
+  })
 
   const stylishCardStyle = {
     border: "1px solid #ccc",
@@ -20,7 +20,7 @@ const History = () => {
     margin: "10px",
     backgroundColor: "#f8f8f8",
     boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
-  };
+  }
   const reversedBookings = Array.isArray(bookings) ? [...bookings].reverse() : []
 
   return (
@@ -42,7 +42,7 @@ const History = () => {
         ))}
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default History;
+export default History
