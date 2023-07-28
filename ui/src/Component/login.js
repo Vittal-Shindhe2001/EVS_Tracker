@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux'
 import { startLoginUser } from '../Actions/userActions';
 import { useHistory, withRouter } from 'react-router-dom/cjs/react-router-dom.min';
+const emailFormat = /^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
 const Login = (props) => {
   const history = useHistory()
   const dispatch = useDispatch()
@@ -12,10 +13,15 @@ const Login = (props) => {
   const error = {}
   const validationForm = () => {
     if (email.trim().length === 0) {
-      error.email = 'Please Enter Email'
-    } 
+      error.email = 'Please Enter Email';
+    } else if (!emailFormat.test(email)) {
+      error.email = 'Please Enter a Valid Email';
+    }
+  
     if (password.trim().length === 0) {
-      error.password = 'Please Enter Password'
+      error.password = 'Please Enter Password';
+    } else if (password.length < 8) {
+      error.password = 'Password must be at least 8 characters long';
     }
   }
   const formdata = {

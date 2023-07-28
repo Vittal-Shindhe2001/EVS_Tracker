@@ -14,6 +14,7 @@ const Station = (props) => {
     const [staff, setStaff] = useState('')
     const [chargingOptionId, setChargingOptionIds] = useState('')
     const [showMap, setShowMap] = useState(false)
+    const [errors, setErrors] = useState({});
 
     useEffect(() => {
         if (props.data) {
@@ -47,22 +48,48 @@ const Station = (props) => {
         setChargingOptions(options)
     }
 
+    const formValidation = () => {
+        const error = {};
+    
+        if (name.trim().length === 0) {
+          error.name = 'Please enter a name';
+        }
+        if (address.trim().length === 0) {
+          error.address = 'Please enter an address';
+        }
+        if (landmark.trim().length === 0) {
+          error.landmark = 'Please enter a landmark';
+        }
+        if (!latitude || !longitude) {
+          error.location = 'Please select the location on the map';
+        }
+    
+        const validChargingOptions = chargingOptions.filter((option) => option.portType.trim() !== '');
+        if (validChargingOptions.length === 0) {
+          error.chargingOptions = 'Please provide at least one charging option';
+        }
+    
+        setErrors(error);
+        return Object.keys(error).length === 0;
+      };
+
 
     const handleSubmit = (e) => {
         e.preventDefault()
 
-        // Create an object with the form data
-        const formData = {
-            name,
-            address,
-            landmark,
-            geo: {
+        if (formValidation()) {
+            // Create an object with the form data
+            const formData = {
+              name,
+              address,
+              landmark,
+              geo: {
                 latitude,
-                longitude
-            },
-            chargingOptions,
-            staff
-        }
+                longitude,
+              },
+              chargingOptions,
+              staff,
+            };
 
         // Reset the form
         const resetForm = () => {
@@ -83,6 +110,7 @@ const Station = (props) => {
             dispatch(startRegisterStation(formData, resetForm))
         }
     }
+}
 
     // //LOCATION 
     const location = (latitude, longitude) => {
@@ -104,9 +132,10 @@ const Station = (props) => {
                                 value={name}
                                 className="form-control inputBorder"
                                 onChange={(e) => setName(e.target.value)}
-                                required
                             />
+                            {errors.name && <div className="text-danger">{errors.name}</div>}
                         </div>
+                        
                         <div>
                             <label htmlFor="address">Address</label>
                             <input
@@ -114,9 +143,9 @@ const Station = (props) => {
                                 id="address"
                                 value={address}
                                 className="form-control"
-                                onChange={(e) => setAddress(e.target.value)}
-                                required
+                                onChange={(e) => setAddress(e.target.value)}   
                             />
+                            {errors.address && <div className="text-danger">{errors.address}</div>}
                         </div>
                         <div>
                             <label htmlFor="landmark">Landmark</label>
@@ -126,8 +155,9 @@ const Station = (props) => {
                                 value={landmark}
                                 className="form-control"
                                 onChange={(e) => setLandmark(e.target.value)}
-                                required
+                                
                             />
+                            {errors.landmark && <div className="text-danger">{errors.landmark}</div>}
                         </div>
                         {showMap ?
                             <div className='card shodow'>
@@ -149,14 +179,13 @@ const Station = (props) => {
                                         className="form-control"
                                         value={option.portType}
                                         onChange={(e) => handleChangeOption(index, e.target.value)}
-                                        required
                                     />
                                     <button
                                         type="button"
                                         className="btn btn-danger"
                                         onClick={() => handleRemoveOption(index)}>
                                         Remove
-                                    </button>
+                                    </button><br/>
                                 </div>
                             ))}
                             <button
@@ -166,6 +195,7 @@ const Station = (props) => {
                             >
                                 Add Option
                             </button>
+                            {errors.chargingOptions && <div className="text-danger">{errors.chargingOptions}</div>}
                         </div>
 
                         <div>
