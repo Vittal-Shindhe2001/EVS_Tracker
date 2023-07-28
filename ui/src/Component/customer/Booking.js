@@ -13,6 +13,7 @@ const Booking = (props) => {
   const [port, setPort] = useState('');
   const [ratePerMinute] = useState(50);
   const [stationId,setStationId]=useState('')
+  const [errors, setErrors] = useState({});
   
   //user info
   let token = localStorage.getItem('token')
@@ -43,9 +44,32 @@ const Booking = (props) => {
     stationsId()
   }, [port, startDateTime, endDateTime,calculateAmount]);
 
+  const formValidation = () => {
+    const errors = {};
+
+    if (!port) {
+      errors.port = "Please choose a Port type.";
+    }
+
+    if (!startDateTime) {
+      errors.startDateTime = "Please select the Start Date and Time.";
+    }
+
+    if (!endDateTime) {
+      errors.endDateTime = "Please select the End Date and Time.";
+    } else if (new Date(endDateTime) <= new Date(startDateTime)) {
+      errors.endDateTime = "End Date and Time must be greater than Start Date and Time.";
+    }
+
+    setErrors(errors);
+    return Object.keys(errors).length === 0;
+  };
+
+
   const handleBooking = (e) => {
     e.preventDefault();
 
+    if(formValidation()){
     const formData = {
       amount: amount,
       startDateTime: startDateTime,
@@ -63,6 +87,7 @@ const Booking = (props) => {
     }
 
     dispatch(startBooking(props,formData, reset,tokendata));
+  }
   };
 
   return (
@@ -96,6 +121,7 @@ const Booking = (props) => {
                       ))}
                     </select>
                     <br />
+                    {errors.port && <div className="text-danger">{errors.port}</div>}
                   </div>
                   <div className="mb-3 form-check">
                     <label htmlFor="startDateTime">Start Date and Time:</label>
@@ -110,6 +136,7 @@ const Booking = (props) => {
                       }}
                     />
                     <br />
+                    {errors.startDateTime && <div className="text-danger">{errors.startDateTime}</div>}
                   </div>
                   <div>
                     <label htmlFor="endDateTime">End Date and Time:</label>
@@ -123,6 +150,7 @@ const Booking = (props) => {
                         calculateAmount();
                       }}
                     />
+                     {errors.endDateTime && <div className="text-danger">{errors.endDateTime}</div>}
                   </div>
                   {startDateTime && endDateTime && (
                     <div className="mb-3">

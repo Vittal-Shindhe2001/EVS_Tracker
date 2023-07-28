@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { startRegisterUser } from '../Actions/userActions';
+const emailFormat = /^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
 
 const RegistrationForm = (props) => {
   const [userType, setUserType] = useState('customer');
@@ -58,9 +59,13 @@ const CustomerRegistrationForm = (props) => {
     }
     if (email.trim().length === 0) {
       error.email = 'Please enter an email';
+    } else if (!emailFormat.test(email)) {
+      error.email = 'Please enter a valid email';
     }
     if (password.trim().length === 0) {
       error.password = 'Please enter a password';
+    } else if (password.trim().length < 8) {
+      error.password = 'Password must be at least 8 characters long';
     }
 
     return error;
@@ -166,9 +171,13 @@ const StaffRegistrationForm = (props) => {
     }
     if (email.trim().length === 0) {
       error.email = 'Please enter an email';
+    } else if (!emailFormat.test(email)) {
+      error.email = 'Please enter a valid email';
     }
     if (password.trim().length === 0) {
       error.password = 'Please enter a password';
+    } else if (password.trim().length < 8) {
+      error.password = 'Password must be at least 8 characters long';
     }
 
     return error;
