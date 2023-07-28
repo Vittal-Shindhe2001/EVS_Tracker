@@ -72,10 +72,11 @@ const Map = (props) => {
             <Popup>My current Location</Popup>
           </Marker>
 
-          {chargingStations.map((station) => (
+          {chargingStations.map((station,i) => (
             <Marker
               position={[station.geo.latitude, station.geo.longitude]}
               icon={stationMarkerIcon}
+              key={i}
             >
               <Popup>
                 Name - {station.name} <br />
@@ -85,8 +86,8 @@ const Map = (props) => {
                 Staff-{station.staff}
                 <br />
                 Charging ports -{" "}
-                {station.chargingOptions.map((ports) => {
-                  return <b><li>{ports.portType}</li></b>;
+                {station.chargingOptions.map((ports,i) => {
+                  return <b key={i} ><li>{ports.portType}</li></b>;
                 })}
                 <br />
                   <button

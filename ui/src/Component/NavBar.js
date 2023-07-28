@@ -17,7 +17,7 @@ import AccountDelete from "./customer/AccountDelete"
 import { BsFillFileEarmarkPersonFill } from "react-icons/bs";
 import { AiFillSetting,AiFillHome,AiFillDashboard } from "react-icons/ai";
 import { BiLogOut,BiLogIn } from "react-icons/bi";
-import { FaMapMarkedAlt,FaRegIdBadge } from "react-icons/fa";
+import { FaMapMarkedAlt,FaRegIdBadge,FaHistory } from "react-icons/fa";
 import { GrHistory } from "react-icons/gr";
 const Navbar = (props) => {
     
@@ -33,7 +33,7 @@ const Navbar = (props) => {
                 {token && tokendata.role === 'admin' &&
                     (<>
                         <div className="container-fluid">
-                            <span className="navbar-brand" href="#">EV CHARGER</span>
+                            <span className="navbar-brand span" href="#"><span className="span">EV CHARGER</span></span>
                             <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                                 <span className="navbar-toggler-icon"></span>
                             </button>
@@ -83,12 +83,9 @@ const Navbar = (props) => {
                                         <Link className="nav-link active" aria-current="page" to='/dashboard'><AiFillDashboard/>DashBoard</Link>
                                     </li>
                                     <li className="nav-item">
-                                        <Link className="nav-link active" aria-current="page" to='/allBooking'>Slots</Link>
-                                    </li>
-                                    <li className="nav-item">
-                                        <Link className="nav-link active" aria-current="page" to='/setting'><AiFillSetting/>Setting</Link>
-                                    </li>
-                                    <li className="nav-item">
+                                        <Link className="nav-link active" aria-current="page" to='/allBooking'><FaHistory />SlotsHistory</Link>
+                                        </li>
+                                        <li>
                                         <Link className="nav-link active" aria-current="page" to='/logout'
                                             onClick={(e) => {
                                                 const confirm = window.confirm('Are You Sure')
