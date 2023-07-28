@@ -28,7 +28,7 @@ const History = () => {
       <h3>Booking list</h3>
       <div className="card-deck">
         {reversedBookings.map((booking) => (
-          <div key={booking.id} className="card" style={stylishCardStyle}>
+          <div key={booking._id} className="card" style={stylishCardStyle}>
             <div className="card-body">
               <h4 className="card-title">Name: {booking.stationName}</h4>
               <p className="card-text">Amount: {booking.amount}</p>

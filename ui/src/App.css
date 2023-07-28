@@ -51,7 +51,7 @@
 
 /* Account Page style */
 .divPadding{
-  padding-top: 4%
+  padding-top: 2%
 }
 
 .bookingButtonclr{
@@ -61,4 +61,7 @@
 .img{
   width: 600px;
   height: 450px;
+}
+.span{
+  color:orange
 }
