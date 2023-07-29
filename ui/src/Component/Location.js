@@ -73,17 +73,16 @@ const Location = (props) => {
       draggable: true, // Make the marker draggable
     }).addTo(map);
 
-    // Update the marker's position when it is dragged
-    markerRef.current.on('dragend', () => {
-      const latLng = markerRef.current.getLatLng();
-      const latitude = latLng.lat;
-      const longitude = latLng.lng;
-      geo(latitude, longitude);
-    });
-
-    const latitude = event.latlng.lat;
-    const longitude = event.latlng.lng;
-    geo(latitude, longitude);
+    // // Update the marker's position when it is dragged
+    // markerRef.current.on('dragend', () => {
+    //   const latLng = markerRef.current.getLatLng();
+    //   const latitude = latLng.lat;
+    //   const longitude = latLng.lng;
+    //   geo(latitude, longitude);
+    // });
+    // const latitude = event.latlng.lat;
+    // const longitude = event.latlng.lng;
+    // geo(latitude, longitude);
   };
 
   return <div id="map" style={{ width: '100%', height: '200px' }} ref={mapRef} />;

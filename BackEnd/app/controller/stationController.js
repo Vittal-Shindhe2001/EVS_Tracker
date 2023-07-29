@@ -1,4 +1,5 @@
 
+const Booking = require('../models/booking')
 const Station = require('../models/station')
 
 const stationController = {}
@@ -84,13 +85,15 @@ stationController.update = async (req, res) => {
     }
 };
 
-//delete station and that related charging options also delete
+//delete station and that related booking also delete
 stationController.deletemany = async (req, res) => {
     try {
         const { id } = req.params
-        const station = Station.findByIdAndDelete(id)
-        if (station) {
-            res.json(station)
+        const station =  Station.findByIdAndDelete(id)
+        const booking=Booking.deleteMany({stationId:id})
+        const promise=await Promise.all([station,booking])
+        if (promise) {
+            res.json(promise[0])
         } else {
             res.json({})
         }
