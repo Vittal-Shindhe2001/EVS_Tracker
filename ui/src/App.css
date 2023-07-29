@@ -51,7 +51,7 @@
 
 /* Account Page style */
 .divPadding{
-  padding-top: 4%
+  padding-top: 2%
 }
 
 .bookingButtonclr{
@@ -61,4 +61,17 @@
 .img{
   width: 600px;
   height: 450px;
+}
+.span{
+  color:orange
+}
+
+/* History page css */
+.histroy{
+  border: "1px solid #ccc";
+    border-radius: "4px";
+    padding: "10px";
+    margin: "10px";
+    background-color: "#f8f8f8";
+    box-shadow: "0 2px 4px rgba(0, 0, 0, 0.1)";
 }
