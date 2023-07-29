@@ -24,17 +24,22 @@ export const startRegisterStation = (formData, resetForm) => {
                     if (station.data.hasOwnProperty('error')) {
                         toast.error(station.data.error, {
                             position: "top-right",
-                            autoClose: 3000,
+                            autoClose: 1000,
                             theme: "colored",
                             });
                     } else {
                         dispatch(setStation(station.data))
                         resetForm()
+                        toast.success('Register Station Successfully', {
+                            position: "top-right",
+                            autoClose: 1000,
+                            theme: "colored",
+                            });
                     }
                 } catch (error) {
                     toast.error(error, {
                         position: "top-right",
-                        autoClose: 3000,
+                        autoClose: 1000,
                         theme: "colored",
                         });
                 }
@@ -78,7 +83,7 @@ export const startDeleteStation = (id) => {
                 dispatch(setDeleteStation(station.data))
                 toast.success('Succesfully Deleted ', {
                     position: "top-right",
-                    autoClose: 3000,
+                    autoClose: 1000,
                     theme: "colored",
                     });
             }
@@ -103,7 +108,7 @@ export const startStaffStation = (name) => {
                 } catch (error) {
                     toast.error(error, {
                         position: "top-right",
-                        autoClose: 3000,
+                        autoClose: 1000,
                         theme: "colored",
                         });
                 }
@@ -130,14 +135,14 @@ export const StartEditStation = (id, chargingOptionId, formData) => {
                     dispatch(setEditStation(edit.data))
                     toast.success('Edit Succesfull', {
                         position: "top-right",
-                        autoClose: 3000,
+                        autoClose: 1000,
                         theme: "colored",
                         });
 
                 } catch (error) {
                     toast.error(error, {
                         position: "top-right",
-                        autoClose: 3000,
+                        autoClose: 1000,
                         theme: "colored",
                         });
                 }
