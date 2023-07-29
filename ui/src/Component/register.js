@@ -89,7 +89,7 @@ const CustomerRegistrationForm = (props) => {
         <div className="col-md-4">
         <h2>Customer Registration</h2>
           <div className='card shadow'>
-            <div className='card-body ' ></div>
+            <div className='card-body ' >
     <form onSubmit={handleSubmit}>
      
       <div className="mb-3">
@@ -134,7 +134,7 @@ const CustomerRegistrationForm = (props) => {
       <button type="submit" className="btn btn-primary">Register</button>
     </form>
     </div> 
-    </div></div></div>
+    </div></div></div></div>
   );
 };
 
@@ -202,7 +202,7 @@ const StaffRegistrationForm = (props) => {
         <div className="col-md-4">
         <h2>Staff Registration</h2>
           <div className='card shadow'>
-            <div className='card-body ' ></div>
+            <div className='card-body ' >
     <form onSubmit={handleSubmit}>
      
       <div className="mb-3">
@@ -257,7 +257,7 @@ const StaffRegistrationForm = (props) => {
       </div>
       <button type="submit" className="btn btn-primary" >Register</button>
     </form>
-    </div></div></div></div>
+    </div></div></div></div></div>
   );
 };
 export default RegistrationForm;
