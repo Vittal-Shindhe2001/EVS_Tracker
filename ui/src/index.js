@@ -8,6 +8,7 @@ import configureStore from './Store/configureStore'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap/dist/js/bootstrap.bundle';
 import 'leaflet/dist/leaflet.css'
+import 'react-toastify/dist/ReactToastify.css';
 
 
 const store = configureStore()

@@ -19,6 +19,7 @@ import { AiFillSetting,AiFillHome,AiFillDashboard } from "react-icons/ai";
 import { BiLogOut,BiLogIn } from "react-icons/bi";
 import { FaMapMarkedAlt,FaRegIdBadge } from "react-icons/fa";
 import { GrHistory } from "react-icons/gr";
+import { ToastContainer, toast } from "react-toastify"
 const Navbar = (props) => {
     
     let token = localStorage.getItem('token')
@@ -56,6 +57,11 @@ const Navbar = (props) => {
                                         <Link className="nav-link active" aria-current="page" onClick={(e) => {
                                             const confirm = window.confirm('Are You Sure')
                                             if (confirm) {
+                                                toast.info('See you soon..!', {
+                                                    position: "top-right",
+                                                    autoClose: 5000,
+                                                    theme: "colored",
+                                                    });
                                                 localStorage.clear()
                                                 props.history.push('/login')
                                             }
@@ -93,6 +99,11 @@ const Navbar = (props) => {
                                             onClick={(e) => {
                                                 const confirm = window.confirm('Are You Sure')
                                                 if (confirm) {
+                                                    toast.info('See you soon..!', {
+                                                        position: "top-right",
+                                                        autoClose: 5000,
+                                                        theme: "colored",
+                                                        });
                                                     localStorage.clear()
                                                     props.history.push('/login')
                                                 }
@@ -129,9 +140,15 @@ const Navbar = (props) => {
                                         <Link className="nav-link active" aria-current="page" onClick={(e) => {
                                             const confirm = window.confirm('Are You Sure')
                                             if (confirm) {
+                                                toast.info('See you soon..!', {
+                                                    position: "top-right",
+                                                    autoClose: 5000,
+                                                    theme: "colored",
+                                                    });
                                                 localStorage.clear()
                                                 props.history.push('/login')
                                             }
+                                            
                                         }}>LogOut</Link>
                                     </li>
                                 </ul>
@@ -189,6 +206,7 @@ const Navbar = (props) => {
                 
             </div>
             }
+            <ToastContainer/>
         </div >
     )
 }
