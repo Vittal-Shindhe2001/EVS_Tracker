@@ -19,6 +19,7 @@ import { AiFillSetting, AiFillHome, AiFillDashboard } from "react-icons/ai";
 import { BiLogOut, BiLogIn } from "react-icons/bi";
 import { FaMapMarkedAlt, FaRegIdBadge, FaHistory } from "react-icons/fa";
 import { GrHistory } from "react-icons/gr";
+import { ToastContainer, toast } from "react-toastify"
 const Navbar = (props) => {
 
     let token = localStorage.getItem('token')
@@ -61,6 +62,11 @@ const Navbar = (props) => {
                                         <Link className="nav-link active" aria-current="page" onClick={(e) => {
                                             const confirm = window.confirm('Are You Sure')
                                             if (confirm) {
+                                                toast.info('See you soon..!', {
+                                                    position: "top-right",
+                                                    autoClose: 5000,
+                                                    theme: "colored",
+                                                    });
                                                 localStorage.clear()
                                                 props.history.push('/login')
                                             }
@@ -95,6 +101,11 @@ const Navbar = (props) => {
                                             onClick={(e) => {
                                                 const confirm = window.confirm('Are You Sure')
                                                 if (confirm) {
+                                                    toast.info('See you soon..!', {
+                                                        position: "top-right",
+                                                        autoClose: 5000,
+                                                        theme: "colored",
+                                                        });
                                                     localStorage.clear()
                                                     props.history.push('/login')
                                                 }
@@ -109,7 +120,7 @@ const Navbar = (props) => {
                 {token && tokendata.role === 'Customer' &&
                     (<>
                         <div className="container-fluid">
-                            <span className="navbar-brand" href="#">EV CHARGER</span>
+                            <span className="navbar-brand" href="#">EV CHARGER TRACKER</span>
                             <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                                 <span className="navbar-toggler-icon"></span>
                             </button>
@@ -131,9 +142,15 @@ const Navbar = (props) => {
                                         <Link className="nav-link active" aria-current="page" onClick={(e) => {
                                             const confirm = window.confirm('Are You Sure')
                                             if (confirm) {
+                                                toast.info('See you soon..!', {
+                                                    position: "top-right",
+                                                    autoClose: 5000,
+                                                    theme: "colored",
+                                                    });
                                                 localStorage.clear()
                                                 props.history.push('/login')
                                             }
+                                            
                                         }}>LogOut</Link>
                                     </li>
                                 </ul>
@@ -191,6 +208,7 @@ const Navbar = (props) => {
 
             </div>
             }
+            <ToastContainer/>
         </div >
     )
 }

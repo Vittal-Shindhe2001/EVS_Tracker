@@ -1,4 +1,5 @@
 
+import { toast } from "react-toastify"
 import axios from "../confi_axios/axios"
 
 export const ADD_STATION = 'ADD_STATION'
@@ -21,13 +22,21 @@ export const startRegisterStation = (formData, resetForm) => {
                 try {
                     const station = await axios.post('/api/station', formData, { headers: { "Authorization": localStorage.getItem('token') } })
                     if (station.data.hasOwnProperty('error')) {
-                        alert(station.data.error)
+                        toast.error(station.data.error, {
+                            position: "top-right",
+                            autoClose: 3000,
+                            theme: "colored",
+                            });
                     } else {
                         dispatch(setStation(station.data))
                         resetForm()
                     }
                 } catch (error) {
-                    console.error(error);
+                    toast.error(error, {
+                        position: "top-right",
+                        autoClose: 3000,
+                        theme: "colored",
+                        });
                 }
             }
         )()
@@ -67,6 +76,11 @@ export const startDeleteStation = (id) => {
             async () => {
                 const station = await axios.delete(`/api/station/${id}`, { headers: { 'Authorization': localStorage.getItem('token') } })
                 dispatch(setDeleteStation(station.data))
+                toast.success('Succesfully Deleted ', {
+                    position: "top-right",
+                    autoClose: 3000,
+                    theme: "colored",
+                    });
             }
         )()
     }
@@ -87,7 +101,11 @@ export const startStaffStation = (name) => {
                     const staff = await axios.get(`/station/staffname?staff=${name}`, { headers: { 'Authorization': localStorage.getItem('token') } })
                     dispatch(setStaffStation(staff.data))
                 } catch (error) {
-                    alert(error)
+                    toast.error(error, {
+                        position: "top-right",
+                        autoClose: 3000,
+                        theme: "colored",
+                        });
                 }
             }
         )()
@@ -110,9 +128,18 @@ export const StartEditStation = (id, chargingOptionId, formData) => {
                     const queryParams = { chargingOptionId: chargingOptionId }
                     const edit = await axios.put(`/api/station/${id}`, formData, { params: queryParams, headers: { 'Authorization': localStorage.getItem('token') } })
                     dispatch(setEditStation(edit.data))
+                    toast.success('Edit Succesfull', {
+                        position: "top-right",
+                        autoClose: 3000,
+                        theme: "colored",
+                        });
 
                 } catch (error) {
-                    alert(error)
+                    toast.error(error, {
+                        position: "top-right",
+                        autoClose: 3000,
+                        theme: "colored",
+                        });
                 }
             }
         )()

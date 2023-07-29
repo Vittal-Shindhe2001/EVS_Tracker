@@ -4,6 +4,7 @@ import { startDeleteStation, startGetAllStations } from "../../Actions/stationAc
 import Station from "../Station";
 import { Modal, ModalHeader, ModalBody } from 'reactstrap'
 import axios from "../../confi_axios/axios";
+import { toast } from "react-toastify";
 
 
 export const AllStationD = (props) => {
@@ -17,7 +18,11 @@ export const AllStationD = (props) => {
     }, [dispatch])
     //handle delete station
     const handleDelete = (id) => {
-        dispatch(startDeleteStation(id))
+        const confirm=window.confirm("Are you sure?")
+        if(confirm){
+            dispatch(startDeleteStation(id))
+        }
+        // dispatch(startDeleteStation(id))
     }
     //handle Edit station
     const handleEdit = (ele) => {

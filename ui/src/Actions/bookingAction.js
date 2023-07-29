@@ -1,3 +1,4 @@
+import { toast } from "react-toastify";
 import axios from "../confi_axios/axios";
 export const ADD_BOOKING = 'ADD_BOOKING'
 export const GET_BOOKING = 'GET_BOOKING'
@@ -39,15 +40,28 @@ export const startBooking = (props,formData, reset,tokendata) => {
                 try {
                     const booking = await axios.post('/api/booking', formData, { headers: { 'Authorization': localStorage.getItem('token') } })
                     if (booking.data.hasOwnProperty('error')) {
-                        alert(booking.data.error)
+                        alert()
+                        toast.warn(booking.data.error, {
+                            position: "top-right",
+                            autoClose: 5000,
+                            theme: "colored",
+                            });
                     } else {
                         dispatch(setBooking(booking.data))
                         reset()
-                        alert("Booked successfully");
+                        toast.success('Booked successfully', {
+                            position: "top-right",
+                            autoClose: 5000,
+                            theme: "colored",
+                            });
                        {tokendata.role='Customer'? props.history.push('/history'): props.history.push('/allBooking')}
                     }
                 } catch (error) {
-                    alert(error)
+                    toast.error(error, {
+                        position: "top-right",
+                        autoClose: 5000,
+                        theme: "colored",
+                        });
                 }
             }
         )()
@@ -63,7 +77,11 @@ export const startGetUserBooking = () => {
                     dispatch(getBooking(booking.data))
 
                 } catch (error) {
-                    alert(error)
+                    toast.error(error, {
+                        position: "top-right",
+                        autoClose: 5000,
+                        theme: "colored",
+                        });
                 }
             }
         )()
@@ -81,7 +99,11 @@ export const startGetStaffBooking = (stationId) => {
             });
             dispatch(getAllBookings(booking.data));
         } catch (error) {
-            alert(error);
+            toast.error(error, {
+                position: "top-right",
+                autoClose: 5000,
+                theme: "colored",
+                });
         }
     };
 };
@@ -94,8 +116,12 @@ export const startGetAllBooking = () => {
                 try {
                     const booking = await axios.get(`/api/all/booking`, { headers: { 'Authorization': localStorage.getItem('token') } })
                     dispatch(setAllBooking(booking.data))
-                } catch (err) {
-                    alert(err)
+                } catch (error) {
+                    toast.error(error, {
+                        position: "top-right",
+                        autoClose: 5000,
+                        theme: "colored",
+                        });
                 }
             }
         )()

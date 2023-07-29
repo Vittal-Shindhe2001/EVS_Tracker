@@ -1,4 +1,4 @@
-
+import { toast ,ToastContainer} from 'react-toastify';
 import axios from '../confi_axios/axios';
 export const GET_USER = 'GET_USER'
 export const USER_INFO = 'USER_INFO'
@@ -9,13 +9,28 @@ export const startRegisterUser = (formdata, props) => {
                 try {
                     const user = await axios.post(`/user/register`, formdata)
                     if (user.data._id) {
+                        toast.success('Register Succesfull', {
+                            position: "top-right",
+                            autoClose: 5000,
+                            theme: "colored",
+                            });
                         props.props.history.push('/login')
+
                     }
                     else if (user.data._message) {
-                        alert(user.data._message)
+                        toast.error(user.data._message, {
+                            position: "top-right",
+                            autoClose: 5000,
+                            theme: "colored",
+                            });
+
                     }
                 } catch (error) {
-                    alert(error.message)
+                    toast.error(error, {
+                        position: "top-right",
+                        autoClose: 5000,
+                        theme: "colored",
+                        });
                 }
             }
         )()
@@ -55,12 +70,26 @@ export const startLoginUser = (formdata, reset, history) => {
                     if (localStorage.getItem('token') !== 'undefined') {
                         dispatch(startGetUserInfo(user.data.token))
                         reset()
+                        toast.success('Login Succesfull', {
+                            position: "top-right",
+                            autoClose: 5000,
+                            theme: "colored",
+                            });
                         history.push('/')
                     } else {
-                        alert('Please Enter valid email or password')
+                        // alert('Please Enter valid email or password')
+                        toast.error('Please Enter valid email or password', {
+                            position: "top-right",
+                            autoClose: 5000,
+                            theme: "colored",
+                            });
                     }
                 } catch (error) {
-                    alert(error)
+                    toast.error(error, {
+                        position: "top-right",
+                        autoClose: 5000,
+                        theme: "colored",
+                        });
                 }
             }
         )()
@@ -82,7 +111,11 @@ export const startAllUserInfo = () => {
                     const user = await axios.get('user/list', { headers: { 'Authorization': localStorage.getItem('token') } })
                     dispatch(setAllUser(user.data))
                 } catch (error) {
-                    alert(error)
+                    toast.error(error, {
+                        position: "top-right",
+                        autoClose: 5000,
+                        theme: "colored",
+                        });
                 }
             }
         )()
@@ -96,7 +129,11 @@ export const startDeleteUserAccount = (props, id, formdata) => {
                 try {
                     const user = await axios.post(`/user/account/delete/${id}`, formdata, { headers: { 'Authorization': localStorage.getItem('token') } })
                     if ((user.data.hasOwnProperty('error'))) {
-                        alert(user.data.error)
+                        toast.error(user.data.error, {
+                            position: "top-right",
+                            autoClose: 5000,
+                            theme: "colored",
+                            });
 
                     } else {
                         localStorage.clear()
@@ -104,7 +141,11 @@ export const startDeleteUserAccount = (props, id, formdata) => {
                     }
 
                 } catch (error) {
-                    alert(error)
+                    toast.error(error, {
+                        position: "top-right",
+                        autoClose: 5000,
+                        theme: "colored",
+                        });
                 }
             }
         )()
