@@ -18,7 +18,7 @@ const Map = (props) => {
           setCurrentLocation([latitude, longitude]);
         },
         (error) => {
-          console.error("Error getting current location:", error);
+          alert("Error getting current location", error);
         }
       );
     }
