@@ -3,10 +3,11 @@ import React from "react";
 const Home = (props) => {
   return (
     <div className="container">
+      {/* <h1 style={{color:welcomeColor}}>welcome</h1> */}
       <div className="row divPadding">
         <div className="col-md-6">
           <header>
-            <h3 className="display-6 text-primary mb-6">Welcome to our Electric Vehicle Charging Station Tracker</h3>
+            <h3 className="display-6  mb-6 " style={{color:welcomeColor}}>Welcome to our Electric Vehicle Charging Station Tracker</h3>
           </header>
           <section>
             <h2 className="h4">About Us</h2>
