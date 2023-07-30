@@ -1,4 +1,4 @@
-import React,{useEffect} from "react"
+import React,{useEffect,lazy,Suspense} from "react"
 import { Link, Route, withRouter, useLocation } from "react-router-dom/cjs/react-router-dom.min"
 import PrivateRoute from "../helper/PrivateRoute"
 import Home from './Home'
@@ -8,7 +8,7 @@ import DashBoard from "./DashBoard"
 import jwt_decode from "jwt-decode";
 import Account from "./Account"
 import Setting from "./Setting"
-import Map from "./customer/Map"
+// import Map from "./customer/Map"
 import Booking from "./customer/Booking"
 import StaffDashBoard from "./staff/StaffDashBoard"
 import BookingHistrory from "./staff/BookingHistory"
@@ -20,6 +20,7 @@ import { BiLogOut, BiLogIn } from "react-icons/bi";
 import { FaMapMarkedAlt, FaRegIdBadge, FaHistory } from "react-icons/fa";
 import { GrHistory } from "react-icons/gr";
 import { ToastContainer, toast } from "react-toastify"
+const Map=React.lazy(()=>import('./customer/Map'))
 const Navbar = (props) => {
 
     let token = localStorage.getItem('token')
@@ -151,7 +152,7 @@ const Navbar = (props) => {
                                                 props.history.push('/login')
                                             }
                                             
-                                        }}>LogOut</Link>
+                                        }}><BiLogOut />LogOut</Link>
                                     </li>
                                 </ul>
                             </div>
@@ -194,12 +195,17 @@ const Navbar = (props) => {
                 <PrivateRoute path='/account' component={Account} />
                 <PrivateRoute path='/setting' component={Setting} />
             </div>}
-            {token && tokendata.role === 'Customer' && <div><PrivateRoute path='/map' component={Map} />
+            {token && tokendata.role === 'Customer' &&
+             <div>
+                <Suspense fallback={<div>Please wait...</div>}>
+                <PrivateRoute path='/map' component={Map} />
+                </Suspense>
                 <PrivateRoute path='/booking' component={Booking} />
                 <PrivateRoute path='/history' component={History} />
                 <PrivateRoute path='/setting' component={AccountDelete} />
 
             </div>
+            
             }
             {token && tokendata.role === 'staff' && <div>
                 <PrivateRoute path='/dashBoard' component={StaffDashBoard} />
