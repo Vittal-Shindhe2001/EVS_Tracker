@@ -2,11 +2,6 @@ import React, { useEffect, Suspense } from "react"
 import { Link, Route, withRouter, useLocation } from "react-router-dom/cjs/react-router-dom.min"
 import PrivateRoute from "../helper/PrivateRoute"
 import jwt_decode from "jwt-decode";
-// import Booking from "./customer/Booking"
-// import StaffDashBoard from "./staff/StaffDashBoard"
-// import BookingHistrory from "./staff/BookingHistory"
-// import History from "./customer/History"
-// import AccountDelete from "./customer/AccountDelete"
 import { BsFillFileEarmarkPersonFill } from "react-icons/bs";
 import { AiFillSetting, AiFillHome, AiFillDashboard } from "react-icons/ai";
 import { BiLogOut, BiLogIn } from "react-icons/bi";
