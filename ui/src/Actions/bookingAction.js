@@ -54,7 +54,11 @@ export const startBooking = (props,formData, reset,tokendata) => {
                             autoClose: 1000,
                             theme: "colored",
                             });
-                       {tokendata.role='Customer'? props.history.push('/history'): props.history.push('/allBooking')}
+                       if (tokendata.role='Customer') {
+                         props.history.push('/history')
+                       }else if(tokendata.role='staff'){
+                        props.history.push('/allBooking')
+                       }
                     }
                 } catch (error) {
                     toast.error(error, {
