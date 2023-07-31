@@ -40,7 +40,6 @@ export const startBooking = (props,formData, reset,tokendata) => {
                 try {
                     const booking = await axios.post('/api/booking', formData, { headers: { 'Authorization': localStorage.getItem('token') } })
                     if (booking.data.hasOwnProperty('error')) {
-                        alert()
                         toast.warn(booking.data.error, {
                             position: "top-right",
                             autoClose: 1000,
@@ -54,7 +53,6 @@ export const startBooking = (props,formData, reset,tokendata) => {
                            props.history.push('/allBooking')
                            dispatch(setBooking(booking.data))
                           }
-                        
                         reset()
                         toast.success('Booked successfully', {
                             position: "top-right",
