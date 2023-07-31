@@ -47,18 +47,21 @@ export const startBooking = (props,formData, reset,tokendata) => {
                             theme: "colored",
                             });
                     } else {
-                        dispatch(setBooking(booking.data))
+                        if (tokendata.role==='Customer') {
+                            props.history.push('/history')
+                            dispatch(setBooking(booking.data))
+                          }else if(tokendata.role==='staff'){
+                           props.history.push('/allBooking')
+                           dispatch(setBooking(booking.data))
+                          }
+                        
                         reset()
                         toast.success('Booked successfully', {
                             position: "top-right",
                             autoClose: 1000,
                             theme: "colored",
                             });
-                       if (tokendata.role='Customer') {
-                         props.history.push('/history')
-                       }else if(tokendata.role='staff'){
-                        props.history.push('/allBooking')
-                       }
+                       
                     }
                 } catch (error) {
                     toast.error(error, {
