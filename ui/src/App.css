@@ -75,3 +75,24 @@
     background-color: "#f8f8f8";
     box-shadow: "0 2px 4px rgba(0, 0, 0, 0.1)";
 }
+
+/* Loding css */
+.loading-spinner {
+  position:relative;
+  border: 4px solid rgba(0, 0, 0, 0.3);
+  border-top: 4px solid #3498db;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+  margin: 0 auto;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

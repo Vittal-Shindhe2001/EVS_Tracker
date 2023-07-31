@@ -4,30 +4,36 @@ import { useDispatch, useSelector } from "react-redux"
 import { startAllUserInfo } from "../Actions/userActions"
 import { AllStationD } from "./AccountHelper/AllStationD"
 const Account = (props) => {
-    const dispatch=useDispatch()
-    const user=useSelector(state=>{
+    const dispatch = useDispatch()
+    const user = useSelector(state => {
         if (state.user.data) {
-            return state.user?.data.filter(ele=>{
-                return ele.role!=='admin'
+            return state.user?.data.filter(ele => {
+                return ele.role !== 'admin'
             })
         }
     })
-   
-    useEffect(()=>{
+
+    useEffect(() => {
         dispatch(startAllUserInfo())
-    },[dispatch])
+    }, [dispatch])
     return (
         <div className="container divPadding">
             <div className="row">
                 <div className="col-md-4">
                     <div className="card shodow">
                         <div className="card-body">
-                        <h3>List Of All User({user.length})</h3>
-                        
-                            {user.map(ele=>{
-                                return <ul key={ele._id}><li >{ele.name}({ele.role})</li></ul>
-                            })}
-                        
+                            {user.length>0 ? (
+                                <>
+                                    <h3>List Of All Users ({user.length})</h3>
+                                    {user.map((ele) => (
+                                        <ul key={ele._id}>
+                                            <li>{ele.name} ({ele.role})</li>
+                                        </ul>
+                                    ))}
+                                </>
+                            ) : (
+                                <h1>No users found.</h1>
+                            )}
                         </div>
                     </div>
                 </div>
@@ -41,7 +47,7 @@ const Account = (props) => {
                     <AllStationD />
                 </div>
             </div>
-            
+
         </div>
     )
 }
