@@ -37,6 +37,9 @@ const BookingHistrory = () => {
               <p>Amount: {booking.amount}</p>
               <p>Start Date and Time: {booking.startDateTime}</p>
               <p>End Date and Time: {booking.endDateTime}</p>
+              <p className="card-text">
+                Status: {booking.isStationBooked ? "booked" : "Your booking Slot Expired"}
+              </p>
               <hr />
             </div>
           ))}
