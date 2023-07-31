@@ -1,17 +1,4 @@
-
-import React from "react"
-// Function to generate a random color in hexadecimal format
-const getRandomColor = () => {
-    const letters = "0123456789ABCDEF"
-    let color = "#"
-    for (let i = 0; i < 6; i++) {
-      color += letters[Math.floor(Math.random() * 16)]
-    }
-    return color
-  };
-
-  // Generate a random color for the welcome text
-  const welcomeColor = getRandomColor()
+import React from "react";
 
 const Home = (props) => {
   return (

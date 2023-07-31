@@ -43,7 +43,7 @@ export const startBooking = (props,formData, reset,tokendata) => {
                         alert()
                         toast.warn(booking.data.error, {
                             position: "top-right",
-                            autoClose: 5000,
+                            autoClose: 1000,
                             theme: "colored",
                             });
                     } else {
@@ -51,7 +51,7 @@ export const startBooking = (props,formData, reset,tokendata) => {
                         reset()
                         toast.success('Booked successfully', {
                             position: "top-right",
-                            autoClose: 5000,
+                            autoClose: 1000,
                             theme: "colored",
                             });
                        {tokendata.role='Customer'? props.history.push('/history'): props.history.push('/allBooking')}
@@ -59,7 +59,7 @@ export const startBooking = (props,formData, reset,tokendata) => {
                 } catch (error) {
                     toast.error(error, {
                         position: "top-right",
-                        autoClose: 5000,
+                        autoClose: 1000,
                         theme: "colored",
                         });
                 }
@@ -79,7 +79,7 @@ export const startGetUserBooking = () => {
                 } catch (error) {
                     toast.error(error, {
                         position: "top-right",
-                        autoClose: 5000,
+                        autoClose: 1000,
                         theme: "colored",
                         });
                 }
@@ -101,7 +101,7 @@ export const startGetStaffBooking = (stationId) => {
         } catch (error) {
             toast.error(error, {
                 position: "top-right",
-                autoClose: 5000,
+                autoClose: 1000,
                 theme: "colored",
                 });
         }
@@ -119,7 +119,7 @@ export const startGetAllBooking = () => {
                 } catch (error) {
                     toast.error(error, {
                         position: "top-right",
-                        autoClose: 5000,
+                        autoClose: 1000,
                         theme: "colored",
                         });
                 }

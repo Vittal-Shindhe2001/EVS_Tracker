@@ -1,5 +1,5 @@
 import React from "react";
-import jwt_decode from "jwt-decode"; 
+import jwt_decode from "jwt-decode";
 import { useDispatch } from "react-redux";
 import { useState, useEffect } from "react";
 import { startBooking } from "../../Actions/bookingAction";
@@ -14,19 +14,21 @@ const Booking = (props) => {
   const [ratePerMinute] = useState(50);
   const [stationId,setStationId]=useState('')
   const [errors, setErrors] = useState({});
-  
-  //user info
+
+  // user info
   let token = localStorage.getItem('token')
-    let tokendata
-    if (token) {
-        tokendata = jwt_decode(token)
-    } 
-  //station id set to stationId state
+  let tokendata
+  if (token) {
+    tokendata = jwt_decode(token)
+  }
+
+  // station id set to stationId state
   const stationsId=()=>{
     if (station) {
       setStationId(station._id)
     }
   }
+
   const calculateAmount = () => {
     if (startDateTime && endDateTime) {
       const start = new Date(startDateTime);
@@ -35,14 +37,14 @@ const Booking = (props) => {
       const amount = duration * ratePerMinute;
       setAmount(amount);
     } else {
-      setAmount("");
+      setAmount(0);
     }
   };
 
   useEffect(() => {
     calculateAmount();
     stationsId()
-  }, [port, startDateTime, endDateTime,calculateAmount]);
+  }, [port, startDateTime, endDateTime]);
 
   const formValidation = () => {
     const errors = {};
@@ -70,110 +72,105 @@ const Booking = (props) => {
     e.preventDefault();
 
     if(formValidation()){
-    const formData = {
-      amount: amount,
-      startDateTime: startDateTime,
-      endDateTime: endDateTime,
-      chargingOptionId: port,
-      stationId:stationId,
-      stationName:station.name
-    };
+      const formData = {
+        amount: amount,
+        startDateTime: startDateTime,
+        endDateTime: endDateTime,
+        chargingOptionId: port,
+        stationId:stationId,
+        stationName:station.name
+      };
 
-    const reset = () => {
-      setEndDateTime('')
-      setStartDateTime('')
-      setPort('')
-      setAmount(0)
+      const reset = () => {
+        setEndDateTime('')
+        setStartDateTime('')
+        setPort('')
+        setAmount(0)
+      }
+
+      dispatch(startBooking(props, formData, reset, tokendata));
     }
-
-    dispatch(startBooking(props,formData, reset,tokendata));
-  }
   };
 
   return (
-    <div>
-      <div>
-        <h2>Station Details</h2>
-        <p>Name: {station.name}</p>
-        <p>Address: {station.address}</p>
-        <p>Landmark: {station.landmark}</p>
-        <p>Staff: {station.staff}</p>
-      </div>
-      <div>
-        <div className="container">
-          <div className="row">
-            <div className="col-md-4"></div>
-            <div className="col-md-4">
-              <h1>Book your slot</h1>
-              <div className="card shadow">
-                <div className="card-body"></div>
-                <form onSubmit={handleBooking}>
-                  <div className="mb-3">
-                    <label className="form-label">Choose your Port type</label>
-                    <br />
-                    <select value={port} onChange={(e) => setPort(e.target.value)}>
-                      <option >Select Port</option>
-                      {station.chargingOptions.map((chargingOption) => (
-                        <option key={chargingOption._id}
-                          value={chargingOption._id}>
-                          {chargingOption.portType}
-                        </option>
-                      ))}
-                    </select>
-                    <br />
-                    {errors.port && <div className="text-danger">{errors.port}</div>}
-                  </div>
-                  <div className="mb-3 form-check">
-                    <label htmlFor="startDateTime">Start Date and Time:</label>
-                    <input
-                      type="datetime-local"
-                      id="startDateTime"
-                      name="startDateTime"
-                      value={startDateTime}
-                      onChange={(e) => {
-                        setStartDateTime(e.target.value);
-                        calculateAmount();
-                      }}
-                    />
-                    <br />
-                    {errors.startDateTime && <div className="text-danger">{errors.startDateTime}</div>}
-                  </div>
-                  <div>
-                    <label htmlFor="endDateTime">End Date and Time:</label>
-                    <input
-                      type="datetime-local"
-                      id="endDateTime"
-                      name="endDateTime"
-                      value={endDateTime}
-                      onChange={(e) => {
-                        setEndDateTime(e.target.value);
-                        calculateAmount();
-                      }}
-                    />
-                     {errors.endDateTime && <div className="text-danger">{errors.endDateTime}</div>}
-                  </div>
-                  {startDateTime && endDateTime && (
-                    <div className="mb-3">
-                      <label className="form-label">Amount</label>
-                      <input
-                        type="text"
-                        className="form-control"
-                        value={amount}
-                        readOnly
-                      />
-                    </div>
-                  )}
-                  <input type="submit" className="btn btn-primary" />
+    <div className="container">
+      <h2>Station Details</h2>
+      <p>Name: {station.name}</p>
+      <p>Address: {station.address}</p>
+      <p>Landmark: {station.landmark}</p>
+      <p>Staff: {station.staff}</p>
 
-                </form>
-              </div>
+      <div className="row justify-content-center">
+        <div className="col-md-4">
+          <div className="card shadow">
+            <div className="card-body">
+              <h1 className="card-title text-center mb-4">Book Your Slot</h1>
+              <form onSubmit={handleBooking}>
+                <div className="mb-3">
+                  <label className="form-label">Choose your Port type</label>
+                  <select
+                    className={`form-select ${errors.port ? 'is-invalid' : ''}`}
+                    value={port}
+                    onChange={(e) => setPort(e.target.value)}
+                  >
+                    <option value="">Select Port</option>
+                    {station.chargingOptions.map((chargingOption) => (
+                      <option key={chargingOption._id} value={chargingOption._id}>
+                        {chargingOption.portType}
+                      </option>
+                    ))}
+                  </select>
+                  {errors.port && <div className="invalid-feedback">{errors.port}</div>}
+                </div>
+                <div className="mb-3">
+                  <label className="form-label">Start Date and Time:</label>
+                  <input
+                    type="datetime-local"
+                    className={`form-control ${errors.startDateTime ? 'is-invalid' : ''}`}
+                    value={startDateTime}
+                    onChange={(e) => {
+                      setStartDateTime(e.target.value);
+                      calculateAmount();
+                    }}
+                  />
+                  {errors.startDateTime && <div className="invalid-feedback">{errors.startDateTime}</div>}
+                </div>
+                <div className="mb-3">
+                  <label className="form-label">End Date and Time:</label>
+                  <input
+                    type="datetime-local"
+                    className={`form-control ${errors.endDateTime ? 'is-invalid' : ''}`}
+                    value={endDateTime}
+                    onChange={(e) => {
+                      setEndDateTime(e.target.value);
+                      calculateAmount();
+                    }}
+                  />
+                  {errors.endDateTime && <div className="invalid-feedback">{errors.endDateTime}</div>}
+                </div>
+                {startDateTime && endDateTime && (
+                  <div className="mb-3">
+                    <label className="form-label">Amount</label>
+                    <input
+                      type="text"
+                      className="form-control"
+                      value={amount}
+                      readOnly
+                    />
+                  </div>
+                )}
+                <div className="text-center">
+                  <button type="submit" className="btn btn-primary">
+                    Book Now
+                  </button>
+                </div>
+              </form>
             </div>
           </div>
-          <div className="col-md-4"></div>
         </div>
       </div>
     </div>
-
   );
 };
+
 export default Booking;
