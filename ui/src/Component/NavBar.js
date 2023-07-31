@@ -65,7 +65,7 @@ const Navbar = (props) => {
                                             if (confirm) {
                                                 toast.info('See you soon..!', {
                                                     position: "top-right",
-                                                    autoClose: 5000,
+                                                    autoClose: 1000,
                                                     theme: "colored",
                                                 });
                                                 localStorage.clear()
@@ -104,7 +104,7 @@ const Navbar = (props) => {
                                                 if (confirm) {
                                                     toast.info('See you soon..!', {
                                                         position: "top-right",
-                                                        autoClose: 5000,
+                                                        autoClose: 1000,
                                                         theme: "colored",
                                                     });
                                                     localStorage.clear()
@@ -145,7 +145,7 @@ const Navbar = (props) => {
                                             if (confirm) {
                                                 toast.info('See you soon..!', {
                                                     position: "top-right",
-                                                    autoClose: 5000,
+                                                    autoClose: 1000,
                                                     theme: "colored",
                                                 });
                                                 localStorage.clear()

@@ -1,7 +1,4 @@
-
 import React from "react"
-
-
 const Home = (props) => {
   // Function to generate a random color in hexadecimal format
   const getRandomColor = () => {
@@ -14,8 +11,10 @@ const Home = (props) => {
   };
   // Generate a random color for the welcome text
   const welcomeColor = getRandomColor()
+
   return (
     <div className="container">
+      {/* <h1 style={{color:welcomeColor}}>welcome</h1> */}
       <div className="row divPadding">
         <div className="col-md-6">
           <header>

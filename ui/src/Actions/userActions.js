@@ -11,7 +11,7 @@ export const startRegisterUser = (formdata, props) => {
                     if (user.data._id) {
                         toast.success('Register Succesfull', {
                             position: "top-right",
-                            autoClose: 5000,
+                            autoClose: 1000,
                             theme: "colored",
                             });
                         props.props.history.push('/login')
@@ -20,7 +20,7 @@ export const startRegisterUser = (formdata, props) => {
                     else if (user.data._message) {
                         toast.error(user.data._message, {
                             position: "top-right",
-                            autoClose: 5000,
+                            autoClose: 1000,
                             theme: "colored",
                             });
 
@@ -28,7 +28,7 @@ export const startRegisterUser = (formdata, props) => {
                 } catch (error) {
                     toast.error(error, {
                         position: "top-right",
-                        autoClose: 5000,
+                        autoClose: 1000,
                         theme: "colored",
                         });
                 }
@@ -72,7 +72,7 @@ export const startLoginUser = (formdata, reset, history) => {
                         reset()
                         toast.success('Login Succesfull', {
                             position: "top-right",
-                            autoClose: 5000,
+                            autoClose: 1000,
                             theme: "colored",
                             });
                         history.push('/')
@@ -80,14 +80,14 @@ export const startLoginUser = (formdata, reset, history) => {
                         // alert('Please Enter valid email or password')
                         toast.error('Please Enter valid email or password', {
                             position: "top-right",
-                            autoClose: 5000,
+                            autoClose: 1000,
                             theme: "colored",
                             });
                     }
                 } catch (error) {
                     toast.error(error, {
                         position: "top-right",
-                        autoClose: 5000,
+                        autoClose: 1000,
                         theme: "colored",
                         });
                 }
@@ -113,7 +113,7 @@ export const startAllUserInfo = () => {
                 } catch (error) {
                     toast.error(error, {
                         position: "top-right",
-                        autoClose: 5000,
+                        autoClose: 1000,
                         theme: "colored",
                         });
                 }
@@ -131,7 +131,7 @@ export const startDeleteUserAccount = (props, id, formdata) => {
                     if ((user.data.hasOwnProperty('error'))) {
                         toast.error(user.data.error, {
                             position: "top-right",
-                            autoClose: 5000,
+                            autoClose: 1000,
                             theme: "colored",
                             });
 
@@ -143,7 +143,7 @@ export const startDeleteUserAccount = (props, id, formdata) => {
                 } catch (error) {
                     toast.error(error, {
                         position: "top-right",
-                        autoClose: 5000,
+                        autoClose: 1000,
                         theme: "colored",
                         });
                 }
