@@ -1,7 +1,10 @@
 
 import React from "react"
-// Function to generate a random color in hexadecimal format
-const getRandomColor = () => {
+
+
+const Home = (props) => {
+  // Function to generate a random color in hexadecimal format
+  const getRandomColor = () => {
     const letters = "0123456789ABCDEF"
     let color = "#"
     for (let i = 0; i < 6; i++) {
@@ -9,17 +12,14 @@ const getRandomColor = () => {
     }
     return color
   };
-
   // Generate a random color for the welcome text
   const welcomeColor = getRandomColor()
-
-const Home = (props) => {
   return (
     <div className="container">
       <div className="row divPadding">
         <div className="col-md-6">
           <header>
-            <h3 className="display-6  mb-6" style={{color:welcomeColor}}>Welcome to our Electric Vehicle Charging Station Tracker</h3>
+            <h3 className="display-6  mb-6" style={{ color: welcomeColor }}>Welcome to our Electric Vehicle Charging Station Tracker</h3>
           </header>
           <section>
             <h2 className="h4">About Us</h2>
@@ -36,7 +36,7 @@ const Home = (props) => {
               We offer different roles with specific privileges.
             </p>
             <p className="lead">
-            Once logged in, you can choose a station, select a charging
+              Once logged in, you can choose a station, select a charging
               option, and specify the start and end date/time for your charging session.
               The booking will be confirmed, and you can start charging your vehicle
               at the selected station.
