@@ -30,12 +30,15 @@ const Setting = (props) => {
             <h2>All Bookings</h2>
             <div className="card-deck">
         {bookings.map((booking) => (
-          <div key={booking.id} className="card" style={stylishCardStyle}>
+          <div key={booking._id} className="card" style={stylishCardStyle}>
             <div className="card-body">
               <h4 className="card-title" >Name: {booking.stationName}</h4>
               <p className="card-text" >Amount: {booking.amount}</p>
               <p className="card-text">Start: {booking.startDateTime}</p>
               <p className="card-text">End: {booking.endDateTime}</p>
+              <p className="card-text">
+                Status: {booking.isStationBooked ? "booked" : "Your booking Slot Expired"}
+              </p>
             </div>
           </div>
         ))}
