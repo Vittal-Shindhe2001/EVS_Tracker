@@ -16,7 +16,6 @@ const AccountDelete = (props) => {
     }
     const handleDelete = (e) => {
         e.preventDefault()
-
         dispatch(startDeleteUserAccount(props,user._id, formData))
     }
 

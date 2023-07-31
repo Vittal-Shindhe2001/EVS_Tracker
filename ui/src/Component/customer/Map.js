@@ -8,7 +8,7 @@ import { startGetAllStations } from "../../Actions/stationAction";
 const Map = (props) => {
 
   const [currentLocation, setCurrentLocation] = useState(null);
-  const [station,setStation]=useState('')
+ 
   const dispatch = useDispatch();
   useEffect(() => {
     if (navigator.geolocation) {
@@ -44,12 +44,11 @@ const Map = (props) => {
     iconSize: [30, 30],
   });
   const handleBooking = (station) => {
-    setStation(station)
+    
     if (window.confirm("You want to book the slot")) {
       props.history.push({
         pathname: "/booking",
         state: { station: station }
-        // location={{ state: { station: stationData } }}
       });
     }
   };
