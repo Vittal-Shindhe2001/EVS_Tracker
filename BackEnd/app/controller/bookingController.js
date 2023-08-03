@@ -1,5 +1,8 @@
+const nodemailer = require("nodemailer");
 const Booking = require('../models/booking')
-const Station = require('../models/station')
+const Station = require('../models/station');
+const User = require("../models/user");
+require('dotenv').config()
 const bookingController = {}
 
 // Function to update the isStationBooked field for a station
@@ -39,6 +42,36 @@ bookingController.create = async (req, res) => {
         if (booking) {
             // Update the isStationBooked field in the Station model to true
             await updateStationBookingStatus(body.stationId, true)
+            //FIND CUSTOMER 
+            // Find the customer based on their ID
+            const customerId = req.user.id
+            const user = await User.findById(customerId)
+            
+            //Find station
+            const stationId = body.stationId
+            const station = await Station.findById(stationId)
+            //NODEMAILER 
+            const transporter = nodemailer.createTransport({
+                host: 'smtp.gmail.com',
+                port: 587,
+                auth: {
+                    user: 'vitthalss2001@gmail.com',
+                    pass: 'iuriwpbrlyshphtk'
+                }
+            });
+            let info = await transporter.sendMail({
+                from: `${station.name}🔌  <vitthalss2001@gmail.com>`, // sender address
+                to: user.email, //  receivers
+                subject: "Slot Book ✔", // Subject line
+                text: "Your Slot is Booked successfull", // plain text body
+                html: `<h1>Station Name:${station.name}</h1>
+                <h1>Staff Name:${station.staff}</h1>
+                <b>Booking Id:${booking._id}</b> <br/>
+                <span>Start Date:${booking.startDateTime}</span><br/>
+                <span >Start Date:${booking.endDateTime}</span>
+                `, // html body
+            })
+            console.log("Message sent: %s", info.messageId)
             res.json(booking)
             const now = new Date()
             const timeUntilEnd = new Date(body.endDateTime).getTime() - now.getTime()
@@ -147,7 +180,7 @@ bookingController.aggregate = async (req, res) => {
         const booking = await Booking.aggregate([
             {
                 $match: {
-                    amount: {$gte:100,$lte:1000}
+                    amount: { $gte: 100, $lte: 1000 }
                 }
             }
         ]);

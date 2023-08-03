@@ -7,6 +7,7 @@ const stationController = {}
 stationController.create = async (req, res) => {
     try {
         const body = req.body
+        console.log(body);
         const station = new Station(body)
         const res = await station.save()
         if (res) {

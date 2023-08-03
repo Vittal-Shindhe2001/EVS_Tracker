@@ -6,18 +6,18 @@ const emailFormat = /^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}
 const Login = (props) => {
   const history = useHistory()
   const dispatch = useDispatch()
-
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [messageError, setMessageError] = useState({})
   const error = {}
+  
   const validationForm = () => {
     if (email.trim().length === 0) {
       error.email = 'Please Enter Email';
     } else if (!emailFormat.test(email)) {
       error.email = 'Please Enter a Valid Email';
     }
-  
+
     if (password.trim().length === 0) {
       error.password = 'Please Enter Password';
     } else if (password.length < 8) {
@@ -61,7 +61,7 @@ const Login = (props) => {
                 </div>
                 <div className="mb-3 ">
                   <label htmlFor="exampleInputPassword1" className="form-label">Password</label>
-                  <input type="password" className="form-control" id="exampleInputPassword1" value={password}
+                  <input type='password' className="form-control" id="exampleInputPassword1" value={password}
                     onChange={(e) => { setPassword(e.target.value) }} />
                   {messageError.password && <div><span style={{ color: "red" }}>{messageError.password}</span></div>}
                 </div>

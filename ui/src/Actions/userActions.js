@@ -1,4 +1,4 @@
-import { toast ,ToastContainer} from 'react-toastify';
+import { toast } from 'react-toastify';
 import axios from '../confi_axios/axios';
 export const GET_USER = 'GET_USER'
 export const USER_INFO = 'USER_INFO'
