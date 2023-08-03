@@ -4,8 +4,6 @@ import { startDeleteStation, startGetAllStations } from "../../Actions/stationAc
 import Station from "../Station";
 import { Modal, ModalHeader, ModalBody } from 'reactstrap'
 import axios from "../../confi_axios/axios";
-import { toast } from "react-toastify";
-
 
 export const AllStationD = (props) => {
     const [modal, setModal] = useState(false)

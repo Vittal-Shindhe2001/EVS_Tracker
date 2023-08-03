@@ -5,10 +5,8 @@ import { useDispatch, useSelector } from "react-redux"
 const Setting = (props) => {
     const dispatch=useDispatch()
     useEffect(()=>{
-        dispatch(startGetAllBooking())
-       
-    },[dispatch])
-   
+        dispatch(startGetAllBooking())   
+    },[dispatch])   
     //booking history
     const bookings=useSelector((state)=>{
         return state.booking.data
@@ -24,7 +22,6 @@ const Setting = (props) => {
 
     return(
          <div className="container-fluid">
-          
             {bookings.length >0 ?
             <div>
             <h2>All Bookings</h2>

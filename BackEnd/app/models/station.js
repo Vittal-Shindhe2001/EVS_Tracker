@@ -21,6 +21,9 @@ const StationSchema = new Schema({
         {
             portType: {
                 type: String
+            },
+            price: {
+                type: Number
             }
         }
     ],
