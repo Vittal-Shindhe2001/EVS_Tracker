@@ -6,12 +6,13 @@ import { AllStationD } from "./AccountHelper/AllStationD"
 const Account = (props) => {
     const dispatch = useDispatch()
     const user = useSelector(state => {
-        if (state.user.data) {
-            return state.user?.data.filter(ele => {
-                return ele.role !== 'admin'
-            })
+        if (state.user?.data && Array.isArray(state.user.data)) {
+            return state.user.data.filter(ele => ele.role !== 'admin')
+        } else {
+            return []// Return an empty array or handle other cases here
         }
-    })
+    });
+    
 
     useEffect(() => {
         dispatch(startAllUserInfo())
