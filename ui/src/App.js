@@ -1,16 +1,15 @@
 import React from 'react';
 import './App.css';
 import NavBar from './Component/NavBar'
-import Calender from './Component/Calender';
+import StationLocation from './Component/AccountHelper/StationLocation';
 
 
 
 function App() {
   return (
     <div className="App">
-     
-      {/* <NavBar /> */}
-      <Calender />
+     {/* <StationLocation /> */}
+      <NavBar />
     
     </div>
   );

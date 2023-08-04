@@ -122,7 +122,6 @@ const Station = (props) => {
     }
     return (
         <div className="container">
-            <h2>Add Station</h2>
             <div className="card shodow" >
                 <div className="card-body">
                     <form onSubmit={handleSubmit}>

@@ -78,9 +78,7 @@ userController.account = async (req, res) => {
         const user = await User.findOneAndDelete({ _id: id })
         const compare = await bcrypt.compare(body.password, user.password)
         if (compare) {
-            const book = Booking.deleteMany({ customerId: id })
-            const result = await Promise.all([user, book])
-            res.json(result[0])
+            res.json('Account Deleted Successfuly')
         } else {
             res.json({ error: "Check Your Password" })
         }

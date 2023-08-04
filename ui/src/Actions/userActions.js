@@ -83,6 +83,7 @@ export const startLoginUser = (formdata, reset, history) => {
                             autoClose: 1000,
                             theme: "colored",
                             });
+                            localStorage.clear()
                     }
                 } catch (error) {
                     toast.error(error, {
@@ -138,6 +139,7 @@ export const startDeleteUserAccount = (props, id, formdata) => {
                     } else {
                         localStorage.clear()
                         props.history.push('/login')
+                        alert(user.data)
                     }
 
                 } catch (error) {

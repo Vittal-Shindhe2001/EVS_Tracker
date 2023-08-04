@@ -91,10 +91,8 @@ stationController.deletemany = async (req, res) => {
     try {
         const { id } = req.params
         const station =  Station.findByIdAndDelete(id)
-        const booking=Booking.deleteMany({stationId:id})
-        const promise=await Promise.all([station,booking])
-        if (promise) {
-            res.json(promise[0])
+        if (station) {
+            res.json(station)
         } else {
             res.json({})
         }
