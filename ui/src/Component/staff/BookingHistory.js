@@ -26,10 +26,18 @@ const BookingHistrory = () => {
       dispatch(startGetStaffBooking(...stationId));
     }
   }, [dispatch, station]);
+  const stylishCardStyle = {
+    border: "1px solid #ccc",
+    borderRadius: "4px",
+    padding: "10px",
+    margin: "10px",
+    backgroundColor: "#f8f8f8",
+    boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
+  };
   return (
     <div>
       {staffBooking.length > 0 ? (
-        <div>
+        <div className="card" style={stylishCardStyle}>
           <h3>Staff Booking List</h3>
           {staffBooking.map((booking) => (
             <div key={booking._id}>
@@ -37,6 +45,9 @@ const BookingHistrory = () => {
               <p>Amount: {booking.amount}</p>
               <p>Start Date and Time: {booking.startDateTime}</p>
               <p>End Date and Time: {booking.endDateTime}</p>
+              <h3>Car Details</h3>
+              <p>User Car Name: {booking.carName}</p>
+              <p>Model:{booking.model}</p>
               <p className="card-text">
                 Status: {booking.isStationBooked ? "booked" : "Your booking Slot Expired"}
               </p>

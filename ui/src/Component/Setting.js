@@ -36,6 +36,9 @@ const Setting = (props) => {
               <p className="card-text" >Amount: {booking.amount}</p>
               <p className="card-text">Start: {booking.startDateTime}</p>
               <p className="card-text">End: {booking.endDateTime}</p>
+              <h3>Car Details</h3>
+              <p>User Car Name: {booking.carName}</p>
+              <p>Model:{booking.model}</p>
               <p className="card-text">
                 Status: {booking.isStationBooked ? "booked" : "Your booking Slot Expired"}
               </p>

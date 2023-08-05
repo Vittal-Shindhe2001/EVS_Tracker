@@ -59,6 +59,11 @@ export const startBooking = (props,formData, reset,tokendata) => {
                             autoClose: 1000,
                             theme: "colored",
                             });
+                        toast.success('Happy Journy', {
+                            position: "top-right",
+                            autoClose: 3000,
+                            theme: "colored",
+                            });
                        
                     }
                 } catch (error) {

@@ -7,9 +7,9 @@ const StaffDashBoard=(props)=>{
     return(
         <div className="container-fluid">
         <div className="row">
-            <div className="col-md-5">
+            {/* <div className="col-md-5">
                 <Station />
-            </div>
+            </div> */}
             <div className="col-md-6 divPadding ">
                 <StaffStations />
             </div>
