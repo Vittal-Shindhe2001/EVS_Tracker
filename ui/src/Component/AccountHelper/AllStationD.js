@@ -3,14 +3,15 @@ import { useDispatch, useSelector } from "react-redux";
 import { startDeleteStation, startGetAllStations } from "../../Actions/stationAction";
 import Station from "../Station";
 import { Modal, ModalHeader, ModalBody } from 'reactstrap'
-import axios from "../../confi_axios/axios";
-import { toast } from "react-toastify";
-
+import StationLocation from "./StationLocation";
 
 export const AllStationD = (props) => {
     const [modal, setModal] = useState(false)
-    const toggle = () => setModal(!modal)
+    const [show, setShow] = useState(false)
+    const [show1, setShow1] = useState(false)
+    const toggle = () => { setModal(!modal) }
     const [edit, setEdit] = useState({})
+    const [location, setLocation] = useState({})
     const dispatch = useDispatch()
     const station = useSelector(state => { return state.station })
     useEffect(() => {
@@ -18,23 +19,26 @@ export const AllStationD = (props) => {
     }, [dispatch])
     //handle delete station
     const handleDelete = (id) => {
-        const confirm=window.confirm("Are you sure?")
-        if(confirm){
+        const confirm = window.confirm("Are you sure?")
+        if (confirm) {
             dispatch(startDeleteStation(id))
         }
         // dispatch(startDeleteStation(id))
     }
     //handle Edit station
     const handleEdit = (ele) => {
+        setShow1(false)
+        setShow(true)
         toggle()
         setEdit(ele)
+
     }
 
     const handleLocation = async (ele) => {
-        const result = await axios.get(`https://api.opencagedata.com/geocode/v1/json?q=${ele.latitude}+${ele.longitude}&key=21f121c390e64295a445928b4d642f54`)
-        const res = (result.data.results.map(ele => ele.components.city
-        ));
-        alert(res)
+        setShow(false)
+        setShow1(true)
+        toggle()
+        setLocation(ele)
     }
     return (
         <div className="table-container">
@@ -81,14 +85,23 @@ export const AllStationD = (props) => {
                     </div> : <h1>No Station Found</h1>}
                 </div>
             </div>
-            <Modal isOpen={modal} toggle={toggle} >
+            {show && <Modal isOpen={modal} toggle={toggle} >
                 <ModalHeader toggle={toggle}>Edit Station</ModalHeader>
                 <ModalBody >
                     <div className="col-md-12">
                         <Station data={edit} toggle={toggle} />
                     </div>
                 </ModalBody>
-            </Modal>
+            </Modal>}
+
+            {show1 && <Modal isOpen={modal} toggle={toggle} >
+                <ModalHeader toggle={toggle}>Station Location</ModalHeader>
+                <ModalBody >
+                    <div className="col-md-12">
+                        <StationLocation data={location} />
+                    </div>
+                </ModalBody>
+            </Modal>}
         </div>
     )
 }

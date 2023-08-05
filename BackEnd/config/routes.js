@@ -76,5 +76,6 @@ router.get('/api/staff/booking', authenticateUser, (req, res, next) => {
     next()
 }, authorizeUser, bookingController.staffAll)
 
-
+//aggreget
+router.get('/api/aggreget',bookingController.aggregate)
 module.exports = router

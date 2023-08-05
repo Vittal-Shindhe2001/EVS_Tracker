@@ -7,11 +7,12 @@ import { startBooking } from "../../Actions/bookingAction";
 const Booking = (props) => {
   const { station } = props.location.state;
   const dispatch = useDispatch();
-  const [amount, setAmount] = useState(0);
   const [startDateTime, setStartDateTime] = useState("");
   const [endDateTime, setEndDateTime] = useState("");
   const [port, setPort] = useState('');
-  const [ratePerMinute] = useState(50);
+  const [ratePerMinute,setRatePerMinute] = useState(0)
+  //port type price one minute
+  const [pricePortType,setPricePortType]=useState(0)
   const [stationId,setStationId]=useState('')
   const [errors, setErrors] = useState({});
 
@@ -21,7 +22,17 @@ const Booking = (props) => {
   if (token) {
     tokendata = jwt_decode(token)
   }
-
+  //SET PRICE OF THE PORT DEFAULT
+  const price=()=>{
+    if (station) {
+    const price=station.chargingOptions.map(ele=>{
+      if (ele._id===port) {
+        return ele.price
+      }
+     })  
+     setPricePortType(price)
+    }
+  }
   // station id set to stationId state
   const stationsId=()=>{
     if (station) {
@@ -34,16 +45,18 @@ const Booking = (props) => {
       const start = new Date(startDateTime);
       const end = new Date(endDateTime);
       const duration = (end - start) / 60000;
-      const amount = duration * ratePerMinute;
-      setAmount(amount);
-    } else {
-      setAmount(0);
+      const amount = duration * pricePortType;
+      setRatePerMinute(amount);
+    } 
+    else {
+      setRatePerMinute(0);
     }
-  };
+  }
 
   useEffect(() => {
     calculateAmount();
     stationsId()
+    price()
   }, [port, startDateTime, endDateTime]);
 
   const formValidation = () => {
@@ -73,7 +86,7 @@ const Booking = (props) => {
 
     if(formValidation()){
       const formData = {
-        amount: amount,
+        amount: ratePerMinute,
         startDateTime: startDateTime,
         endDateTime: endDateTime,
         chargingOptionId: port,
@@ -85,9 +98,8 @@ const Booking = (props) => {
         setEndDateTime('')
         setStartDateTime('')
         setPort('')
-        setAmount(0)
+        ratePerMinute(0)
       }
-
       dispatch(startBooking(props, formData, reset, tokendata));
     }
   };
@@ -154,8 +166,8 @@ const Booking = (props) => {
                     <input
                       type="text"
                       className="form-control"
-                      value={amount}
-                      readOnly
+                      value={ratePerMinute}
+                      disabled
                     />
                   </div>
                 )}

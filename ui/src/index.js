@@ -11,6 +11,7 @@ import 'leaflet/dist/leaflet.css'
 import 'react-toastify/dist/ReactToastify.css';
 
 
+
 const store = configureStore()
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

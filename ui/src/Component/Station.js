@@ -10,12 +10,12 @@ const Station = (props) => {
     const [landmark, setLandmark] = useState('')
     const [latitude, setLatitude] = useState('')
     const [longitude, setLongitude] = useState('')
-    const [chargingOptions, setChargingOptions] = useState([{ portType: '' }])
+    const [chargingOptions, setChargingOptions] = useState([{ portType: '',price:'' }])
     const [staff, setStaff] = useState('')
     const [chargingOptionId, setChargingOptionIds] = useState('')
     const [showMap, setShowMap] = useState(false)
     const [errors, setErrors] = useState({});
-
+    
     useEffect(() => {
         if (props.data) {
             setName(props.data.name || "")
@@ -23,7 +23,7 @@ const Station = (props) => {
             setLandmark(props.data.landmark || "")
             setLatitude(props.data.geo.latitude || "")
             setLongitude(props.data.geo.longitude || "")
-            setChargingOptions(props.data.chargingOptions || [{ portType: "" }])
+            setChargingOptions(props.data.chargingOptions || [{ portType: "",price:"" }])
             setStaff(props.data.staff || "")
             // Extract chargingOptions IDs
             const chargingOptionIds = props.data.chargingOptions.map((option) => option._id)
@@ -33,13 +33,14 @@ const Station = (props) => {
 
     const dispatch = useDispatch()
 
-    const handleChangeOption = (index, value) => {
-        const options = [...chargingOptions]
-        options[index].portType = value
-        setChargingOptions(options)
-    }
+    const handleChangeOption = (index,field,value) => {
+            console.log(value);
+            const options = [...chargingOptions]
+            options[index][field]= value
+            setChargingOptions(options)
+        }
     const handleAddOption = () => {
-        setChargingOptions([...chargingOptions, { portType: '' }])
+        setChargingOptions([...chargingOptions, { portType: '',price:'' }])
     }
 
     const handleRemoveOption = (index) => {
@@ -72,13 +73,14 @@ const Station = (props) => {
         setErrors(error);
         return Object.keys(error).length === 0;
       };
-
+      
 
     const handleSubmit = (e) => {
         e.preventDefault()
-
+        
         if (formValidation()) {
-            // Create an object with the form data
+            
+            //Create  object with the form data
             const formData = {
               name,
               address,
@@ -90,7 +92,7 @@ const Station = (props) => {
               chargingOptions,
               staff,
             };
-
+           
         // Reset the form
         const resetForm = () => {
             setName('')
@@ -98,7 +100,7 @@ const Station = (props) => {
             setLandmark('')
             setLatitude('')
             setLongitude('')
-            setChargingOptions([{ portType: '' }])
+            setChargingOptions([{ portType: '', price: '' }])
             setStaff('')
         }
 
@@ -120,7 +122,6 @@ const Station = (props) => {
     }
     return (
         <div className="container">
-            <h2>Add Station</h2>
             <div className="card shodow" >
                 <div className="card-body">
                     <form onSubmit={handleSubmit}>
@@ -170,34 +171,42 @@ const Station = (props) => {
 
                         }
                         {latitude && longitude && <h5>Latitude:{latitude},Longitude:{longitude}  </h5>}
+                        {errors.location && <div className="text-danger">{errors.location}</div>}
                         <div>
                             <label className="form-label labelFont" >ChargingOptions(portTypes)</label>
                             {chargingOptions.map((option, index) => (
                                 <div key={index} className="input-group mb-3">
-                                    <input
+                                     <input
+                                     placeholder='Port'
                                         type="text"
                                         className="form-control"
                                         value={option.portType}
-                                        onChange={(e) => handleChangeOption(index, e.target.value)}
+                                        onChange={(e) => handleChangeOption(index, 'portType', e.target.value)}
+                                    />
+                                    <input
+                                    placeholder='Price'
+                                        type="text"
+                                        className="form-control"
+                                        value={option.price}
+                                        onChange={(e) => handleChangeOption(index, 'price', e.target.value)}
                                     />
                                     <button
                                         type="button"
                                         className="btn btn-danger"
-                                        onClick={() => handleRemoveOption(index)}>
+                                        onClick={() => handleRemoveOption(index)}
+                                    >
                                         Remove
-                                    </button><br/>
+                                    </button>
                                 </div>
                             ))}
-                            <button
-                                type="button"
-                                className="btn btn-primary"
-                                onClick={handleAddOption}
-                            >
+                            <button type="button" className="btn btn-primary" onClick={handleAddOption}>
                                 Add Option
                             </button>
+ 
+                                    
                             {errors.chargingOptions && <div className="text-danger">{errors.chargingOptions}</div>}
                         </div>
-
+                           
                         <div>
                             <label htmlFor="staff">Staff</label>
                             <input

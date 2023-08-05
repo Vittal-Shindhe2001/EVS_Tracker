@@ -14,7 +14,7 @@ const RegistrationForm = React.lazy(() => import('./Register'))
 const Login = React.lazy(() => import('./Login'))
 const DashBoard = React.lazy(() => import('./DashBoard'))
 const Account = React.lazy(() => import('./Account'))
-const Setting = React.lazy(() => import('./Setting'))
+const HistoryA = React.lazy(() => import('./History'))
 const Map = React.lazy(() => import('./customer/Map'))
 const Booking = React.lazy(() => import('./customer/Booking'))
 const StaffDashBoard = React.lazy(() => import('./staff/StaffDashBoard'))
@@ -56,7 +56,7 @@ const Navbar = (props) => {
                                         <Link className={`nav-link ${location.pathname === '/account' ? "active" : ""} `} aria-current="page" to='/account'><BsFillFileEarmarkPersonFill />Account</Link>
                                     </li>
                                     <li className="nav-item">
-                                        <Link className={`nav-link ${location.pathname === '/setting' ? "active" : ""} `} aria-current="page" to='/setting'><AiFillSetting />Setting</Link>
+                                        <Link className={`nav-link ${location.pathname === '/history' ? "active" : ""} `} aria-current="page" to='/history'><FaHistory />History</Link>
                                     </li>
 
                                     <li className="nav-item">
@@ -196,7 +196,7 @@ const Navbar = (props) => {
                 <Suspense fallback={<Loding/>}>
                     <PrivateRoute path='/dashboard' component={DashBoard} />
                     <PrivateRoute path='/account' component={Account} />
-                    <PrivateRoute path='/setting' component={Setting} />
+                    <PrivateRoute path='/history' component={HistoryA} />
                 </Suspense>
             </div>}
             {token && tokendata.role === 'Customer' &&
