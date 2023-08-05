@@ -188,6 +188,7 @@ bookingController.aggregate = async (req, res) => {
         res.json(booking)
     } catch (error) {
         // Handle the error appropriately
+        res.json(error)
     }
 };
 
