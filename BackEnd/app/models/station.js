@@ -34,6 +34,10 @@ const StationSchema = new Schema({
     isStationBooked: {
         type: Boolean,
         default: false
+    },
+    isDeleted:{
+        type:Boolean,
+        default:false
     }
 
 })

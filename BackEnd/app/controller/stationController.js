@@ -37,7 +37,7 @@ stationController.show = async (req, res) => {
 //list all the station
 stationController.list = async (req, res) => {
     try {
-        const station = await Station.find()
+        const station = await Station.find({isDeleted:false})
         if (station) {
             res.json(station)
         } else {
@@ -87,10 +87,10 @@ stationController.update = async (req, res) => {
 };
 
 //delete station and that related booking also delete
-stationController.deletemany = async (req, res) => {
+stationController.destroy = async (req, res) => {
     try {
         const { id } = req.params
-        const station =  Station.findByIdAndDelete(id)
+        const station = await Station.findByIdAndUpdate(id, { isDeleted: true }, { new: true, runValidators: true });
         if (station) {
             res.json(station)
         } else {
