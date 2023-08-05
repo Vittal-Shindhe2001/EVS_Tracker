@@ -56,7 +56,7 @@ bookingController.create = async (req, res) => {
                 port: 587,
                 auth: {
                     user: 'vitthalss2001@gmail.com',
-                    pass: 'iuriwpbrlyshphtk'
+                    pass: process.env.PASS_KEY
                 }
             });
             let info = await transporter.sendMail({
@@ -69,7 +69,7 @@ bookingController.create = async (req, res) => {
                 <b>Booking Id:${booking._id}</b> <br/>
                 <span>Start Date:${booking.startDateTime}</span><br/>
                 <span >Start Date:${booking.endDateTime}</span>
-                `, // html body
+                `,
             })
             console.log("Message sent: %s", info.messageId)
             res.json(booking)
