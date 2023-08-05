@@ -29,7 +29,7 @@ const BookingSchema = new Schema({
         type: String,
         required:true
     },
-    isStationBooked:{
+    isBooked:{
         type:Boolean,
         default:true
     },

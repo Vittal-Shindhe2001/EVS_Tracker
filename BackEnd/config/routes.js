@@ -46,7 +46,7 @@ router.put('/api/station/:id', authenticateUser, (req, res, next) => {
 router.delete('/api/station/:id', authenticateUser, (req, res, next) => {
     req.permittedRoles = ['admin']
     next()
-}, authorizeUser, stationController.deletemany)
+}, authorizeUser, stationController.destroy)
 //find station on staff name
 router.get('/station/staffname', authenticateUser, (req, res, next) => {
     req.permittedRoles = ['staff']

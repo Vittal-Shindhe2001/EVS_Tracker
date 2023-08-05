@@ -2,7 +2,7 @@
 import React, { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { startAllUserInfo } from "../Actions/userActions"
-import { AllStationD } from "./AccountHelper/AllStationD"
+import { AllStationD } from "./admin/AllStationD"
 const Account = (props) => {
     const dispatch = useDispatch()
     const user = useSelector(state => {

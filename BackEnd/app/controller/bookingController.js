@@ -81,7 +81,7 @@ bookingController.create = async (req, res) => {
                     await updateStationBookingStatus(body.stationId, false)
                     const updatedBooking = await Booking.findByIdAndUpdate(
                         booking._id,
-                        { isStationBooked: false },
+                        { isBooked: false },
                         { new: true }
                     )
 
@@ -188,6 +188,7 @@ bookingController.aggregate = async (req, res) => {
         res.json(booking)
     } catch (error) {
         // Handle the error appropriately
+        res.json(error)
     }
 };
 
