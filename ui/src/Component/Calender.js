@@ -20,7 +20,14 @@ const Calender = (props) => {
     // Set the formatted data as state
     setEvents(formattedEvents)
   }, [props.bookings])
-
+  
+  useEffect(() => {
+    // Cleanup function
+    return () => {
+      // Dispose and remove the popover when component unmounts
+      disposePopover();
+    };
+  }, [])
   // Ref to store the currently active popover
   const activePopoverRef = useRef(null)
 
