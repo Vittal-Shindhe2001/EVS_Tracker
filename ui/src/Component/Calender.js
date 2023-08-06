@@ -15,10 +15,14 @@ const Calender = (props) => {
       title: ele.stationName,
       start: ele.startDateTime,
       end: ele.endDateTime,
+      amount:ele.amount,
+      carName:ele.carName,
+      model:ele.model
       // Add more properties as needed
     }))
     // Set the formatted data as state
     setEvents(formattedEvents)
+    console.log(formattedEvents,"e")
   }, [props.bookings])
 
   // Ref to store the currently active popover
@@ -43,7 +47,13 @@ const Calender = (props) => {
       placement: 'auto',
       trigger: 'manual', // Use manual trigger to control show/hide manually
       customClass: 'popoverStyle',
-      content: `<p><strong>StartDateTime:</strong>${info.event.start} <br/> <strong>EndDateTime:</strong>${info.event.end}</p>`,
+      content: `<p><strong>StartDateTime:</strong>${info.event.start} <br/> 
+                <strong>EndDateTime:</strong>${info.event.end} <br/>
+                <strong>Car Name:</strong>${info.event.carName}<br/>
+                <strong>Car Model:</strong>${info.event.model}<br/>
+                <strong>Amount:</strong>${info.event.amount}<br/>
+                </p> 
+                `,
       html: true,
       
     })

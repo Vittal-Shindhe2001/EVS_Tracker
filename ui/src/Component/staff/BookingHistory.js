@@ -16,7 +16,7 @@ const BookingHistrory = () => {
   })
   useEffect(() => {
     dispatch(startStaffStation(tokendata.name))
-  }, [dispatch,tokendata.name])
+  }, [dispatch, tokendata.name])
   const staffBooking = useSelector((state) => {
     return state.booking.data
   })
@@ -35,33 +35,32 @@ const BookingHistrory = () => {
     boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
   };
   return (
-    <div>
+    <div className="container mt-4" >
       {staffBooking.length > 0 ? (
-        <div className="card-body" style={stylishCardStyle}>
-          <h3>Staff Booking List</h3>
-          <hr/>
+        <div style={stylishCardStyle}>
+          <h3 className="mb-4">Staff Booking List</h3>
+          <hr />
           {staffBooking.map((booking) => (
-            <div key={booking._id}>
-              <p>Booking ID: {booking._id}</p>
-              <p>Amount: {booking.amount}</p>
-              <p>Start Date and Time: {booking.startDateTime}</p>
-              <p>End Date and Time: {booking.endDateTime}</p>
-              <h4>Car Details</h4>
-              <p>Car Name:{booking.carName}</p>
-              <p>Car Model:{booking.model}</p>
-              <p className="card-text">
-                Status: {booking.isStationBooked ? "booked" : "Your booking Slot Expired"}
-              </p>
-             
+            <div key={booking._id} className="card mb-4">
+              <div className="card-body">
+                <h5 className="card-title">Booking ID: {booking._id}</h5>
+                <p className="card-text">Amount: {booking.amount}</p>
+                <p className="card-text">Start Date and Time: {booking.startDateTime}</p>
+                <p className="card-text">End Date and Time: {booking.endDateTime}</p>
+                <h5 className="card-title">Car Details</h5>
+                <p className="card-text">Car Name: {booking.carName}</p>
+                <p className="card-text">Car Model: {booking.model}</p>
+                <p className="card-text">
+                  Status: {booking.isStationBooked ? "Booked" : "Your booking Slot Expired"}
+                </p>
+              </div>
             </div>
           ))}
         </div>
       ) : (
         <h1>No bookings found.</h1>
       )}
-
     </div>
   )
 }
-export default BookingHistrory
-
+export default BookingHistrory;
