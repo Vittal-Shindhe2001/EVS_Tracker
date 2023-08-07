@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import FullCalendar from '@fullcalendar/react'
 import dayGridPlugin from '@fullcalendar/daygrid'
 import timeGridPlugin from '@fullcalendar/timegrid'
@@ -6,21 +7,33 @@ import interactionPlugin from '@fullcalendar/interaction'
 import * as bootstrap from 'bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
 
+
 const Calender = (props) => {
   const [events, setEvents] = useState([])
+  
+  const getUserName = (id) => {
+      const userMatch = props.user.find(ele => ele._id === id)
+      return userMatch ? userMatch.name : "Unknown Customer"
+  }
+
+
 
   useEffect(() => {
-    // Format the data to FullCalendar's event structure
-    const formattedEvents = props.bookings.map((ele) => ({
-      title: ele.stationName,
-      start: ele.startDateTime,
-      end: ele.endDateTime,
-      // Add more properties as needed
-    }))
-    // Set the formatted data as state
-    setEvents(formattedEvents)
+    if (Array.isArray(props.bookings)) { 
+      const formattedEvents = props?.bookings.map((ele) => ({
+        title: ele.stationName,
+        start: ele.startDateTime,
+        end: ele.endDateTime,
+        customer: getUserName(ele.customerId),
+        amount: ele.amount,
+      }));
+      setEvents(formattedEvents)
+    } else {
+      // Handle the case when props.bookings is not an array (e.g., initial loading)
+      setEvents([])
+    }
   }, [props.bookings])
-  
+
   useEffect(() => {
     // Cleanup function
     return () => {
@@ -50,11 +63,14 @@ const Calender = (props) => {
       placement: 'auto',
       trigger: 'manual', // Use manual trigger to control show/hide manually
       customClass: 'popoverStyle',
-      content: `<p><strong>StartDateTime:</strong>${info.event.start} <br/> <strong>EndDateTime:</strong>${info.event.end}</p>`,
+      content: `<p>
+      <strong>CustomerName:</strong>${info.event.extendedProps.customer} <br/>
+      <strong>StartDateTime:</strong>${info.event.start} <br/>
+       <strong>EndDateTime:</strong>${info.event.end} <br/>
+       <strong>Amount:</strong>${info.event.extendedProps.amount} <br/>
+       </p>`,
       html: true,
-      
     })
-
     activePopoverRef.current.show() // Show the popover
   }
 
@@ -62,8 +78,8 @@ const Calender = (props) => {
   const handleCalendarClick = () => {
     // Dispose and remove the popover
     disposePopover()
-  } 
-  
+  }
+
   return (
     <div>
       <FullCalendar
@@ -82,6 +98,7 @@ const Calender = (props) => {
         eventClick={handleEventClick} // Handle event click
         dateClick={handleCalendarClick} // Handle calendar click
       />
+
     </div>
   )
 }

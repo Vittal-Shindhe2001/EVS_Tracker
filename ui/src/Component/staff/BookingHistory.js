@@ -3,6 +3,8 @@ import jwt_decode from "jwt-decode";
 import { useDispatch, useSelector } from "react-redux";
 import { startGetStaffBooking } from "../../Actions/bookingAction";
 import { startStaffStation } from "../../Actions/stationAction";
+import Calender from "../Calender";
+
 
 const BookingHistrory = () => {
   const dispatch = useDispatch()
@@ -11,24 +13,41 @@ const BookingHistrory = () => {
   if (token) {
     tokendata = jwt_decode(token)
   }
+
+  //staff stations get
+  useEffect(() => {
+    dispatch(startStaffStation(tokendata.name))
+  }, [dispatch, tokendata.name])
+
   const station = useSelector((state) => {
     return state.station.data
   })
+
+  //staff station booking
   useEffect(() => {
-    dispatch(startStaffStation(tokendata.name))
-  }, [dispatch,tokendata.name])
+    if (station.length > 0) {
+      const stationIds = station.map((ele) => ele._id )
+      dispatch(startGetStaffBooking(...stationIds))
+
+    }
+  }, [dispatch, station]);
+
   const staffBooking = useSelector((state) => {
     return state.booking.data
   })
-  useEffect(() => {
-    if (station.length > 0) {
-      const stationId = station.map((ele) => ele._id);
-      dispatch(startGetStaffBooking(...stationId));
+
+  //useInfo staff releated station
+  useEffect(()=>{
+    if (staffBooking.length >0) {
+      const customerIds=staffBooking.map(ele=>ele._id)
+     dispatch()
     }
-  }, [dispatch, station]);
+  })
+
+
   return (
     <div>
-      {staffBooking.length > 0 ? (
+      {/* {staffBooking.length > 0 ? (
         <div>
           <h3>Staff Booking List</h3>
           {staffBooking.map((booking) => (
@@ -46,8 +65,8 @@ const BookingHistrory = () => {
         </div>
       ) : (
         <h1>No bookings found.</h1>
-      )}
-
+      )}  */}
+      <Calender bookings={staffBooking} />
     </div>
   )
 }

@@ -87,4 +87,13 @@ userController.account = async (req, res) => {
         res.json(error)
     }
 }
+userController.staffCustomers=async(req,res)=>{
+    try {
+        const {id}=req.params
+        const customers=await User.find({_id:id})
+        
+    } catch (error) {
+        res.json(error)
+    }
+}
 module.exports = userController

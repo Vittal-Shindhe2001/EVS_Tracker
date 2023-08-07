@@ -37,7 +37,7 @@ stationController.show = async (req, res) => {
 //list all the station
 stationController.list = async (req, res) => {
     try {
-        const station = await Station.find({isDeleted:false})
+        const station = await Station.find({ isDeleted: false })
         if (station) {
             res.json(station)
         } else {
@@ -116,5 +116,20 @@ stationController.findOnStaffName = async (req, res) => {
     }
 }
 
-
+stationController.search = async (req, res) => {
+    try {
+        const { name } = req.query
+        console.log(name)
+        const res = await Station.find({
+            '$or': [
+                { name: { $regex: name, $options: 'i' } },
+                { address: { $regex: name, $options: 'i' } },
+            ]
+        })
+        console.log(res);
+        res.json(res)
+    } catch (error) {
+        res.json(error)
+    }
+}
 module.exports = stationController
