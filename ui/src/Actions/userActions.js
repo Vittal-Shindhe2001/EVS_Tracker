@@ -2,6 +2,7 @@ import { toast } from 'react-toastify';
 import axios from '../confi_axios/axios';
 export const GET_USER = 'GET_USER'
 export const USER_INFO = 'USER_INFO'
+export const STATION_USERS='STATION_USERS'
 export const startRegisterUser = (formdata, props) => {
     return (dispatch) => {
         (
@@ -153,13 +154,20 @@ export const startDeleteUserAccount = (props, id, formdata) => {
         )()
     }
 }
+export const setStationUsers=(data)=>{
+    return{
+        type:STATION_USERS,
+        payload:data
+    }
+}
 
 export const startGetStationUsers=(customerIds)=>{
     return(dispatch)=>{
         (
             async()=>{
                 try {
-                    const customers=await axios.get(`/${customerIds}`,{headers:{'Authorization':localStorage.getItem('token')}})
+                    const customers=await axios.get(`/api/customers/${customerIds}`,{headers:{'Authorization':localStorage.getItem('token')}})
+                    dispatch(setStationUsers(customers.data))
                 } catch (error) {
                     alert(error)
                 }
