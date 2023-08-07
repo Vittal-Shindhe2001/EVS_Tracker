@@ -94,10 +94,10 @@ export const startGetUserBooking = () => {
 }
 
 
-export const startGetStaffBooking = (stationId) => {
+export const startGetStaffBooking = (stationIds) => {
     return async (dispatch) => {
         try {
-            const queryParams = { stationId: stationId };
+            const queryParams = { stationId: stationIds };
             const booking = await axios.get(`/api/staff/booking`, {
                 params: queryParams,
                 headers: { Authorization: localStorage.getItem("token") },

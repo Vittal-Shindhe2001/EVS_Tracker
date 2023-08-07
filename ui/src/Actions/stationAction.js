@@ -7,6 +7,7 @@ export const GET_STATION = 'GET_STATION'
 export const DELETE_STATION = 'DELETE_STATION'
 export const STAFF_STATION = 'STAFF_STATION'
 export const EDIT_STATION = 'EDIT_STATION'
+export const SEARCH = 'SEARCH'
 
 export const setStation = (data) => {
     return {
@@ -26,7 +27,7 @@ export const startRegisterStation = (formData, resetForm) => {
                             position: "top-right",
                             autoClose: 1000,
                             theme: "colored",
-                            });
+                        });
                     } else {
                         dispatch(setStation(station.data))
                         resetForm()
@@ -34,14 +35,14 @@ export const startRegisterStation = (formData, resetForm) => {
                             position: "top-right",
                             autoClose: 1000,
                             theme: "colored",
-                            });
+                        });
                     }
                 } catch (error) {
                     toast.error(error, {
                         position: "top-right",
                         autoClose: 1000,
                         theme: "colored",
-                        });
+                    });
                 }
             }
         )()
@@ -85,7 +86,7 @@ export const startDeleteStation = (id) => {
                     position: "top-right",
                     autoClose: 1000,
                     theme: "colored",
-                    });
+                });
             }
         )()
     }
@@ -110,7 +111,7 @@ export const startStaffStation = (name) => {
                         position: "top-right",
                         autoClose: 1000,
                         theme: "colored",
-                        });
+                    });
                 }
             }
         )()
@@ -137,16 +138,33 @@ export const StartEditStation = (id, chargingOptionId, formData) => {
                         position: "top-right",
                         autoClose: 1000,
                         theme: "colored",
-                        });
+                    });
 
                 } catch (error) {
                     toast.error(error, {
                         position: "top-right",
                         autoClose: 1000,
                         theme: "colored",
-                        });
+                    });
                 }
             }
+        )()
+    }
+}
+//search
+export const getSearch = (data) => {
+    return {
+        type: SEARCH,
+        payload: data
+    }
+}
+export const setSearchStation = (search) => {
+    return (dispatch) => {
+        (
+            (async () => {
+                const result = await axios.get(`/api/search?name=${search}`, { headers: { 'Authorization': localStorage.getItem('token') } })
+                console.log(result);
+            })
         )()
     }
 }

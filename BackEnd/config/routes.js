@@ -18,7 +18,11 @@ router.get('/user/list', authenticateUser, (req, res, next) => {
 router.get('/user/Info', authenticateUser, userController.info)
 //delete user Account
 router.post('/user/account/delete/:id', authenticateUser, userController.account)
-
+//station releated user
+router.get('/api/customers',authenticateUser, (req, res, next) => {
+    req.permittedRoles = ['staff']
+    next()
+}, authorizeUser,userController.staffCustomers)
 
 //STATION
 //create station
@@ -52,6 +56,8 @@ router.get('/station/staffname', authenticateUser, (req, res, next) => {
     req.permittedRoles = ['staff']
     next()
 }, authorizeUser, stationController.findOnStaffName)
+//search
+router.get('/api/search',authenticateUser,stationController.search)
 
 //Booking Api's
 router.post('/api/booking', authenticateUser, bookingController.create)

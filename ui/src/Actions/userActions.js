@@ -153,3 +153,17 @@ export const startDeleteUserAccount = (props, id, formdata) => {
         )()
     }
 }
+
+export const startGetStationUsers=(customerIds)=>{
+    return(dispatch)=>{
+        (
+            async()=>{
+                try {
+                    const customers=await axios.get(`/${customerIds}`,{headers:{'Authorization':localStorage.getItem('token')}})
+                } catch (error) {
+                    alert(error)
+                }
+            }
+        )()
+    }
+}

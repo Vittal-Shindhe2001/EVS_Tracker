@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useRef, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { startRegisterUser } from "../Actions/userActions";
 const emailFormat = /^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
@@ -39,7 +39,7 @@ const RegistrationForm = (props) => {
 };
 
 const CustomerRegistrationForm = (props) => {
-
+ const ref=useRef()
   const dispatch = useDispatch();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -69,7 +69,10 @@ const CustomerRegistrationForm = (props) => {
     }
 
     return error;
-  };
+  }
+  useEffect(()=>{
+    ref.current.focus()
+  },[ref])
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -102,7 +105,7 @@ const CustomerRegistrationForm = (props) => {
                     id="name"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
-                  />
+                  ref={ref}/>
                   {messageError.userName && (
                     <div className="text-danger">{messageError.userName}</div>
                   )}
