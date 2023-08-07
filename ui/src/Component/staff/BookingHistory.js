@@ -45,29 +45,6 @@ const BookingHistrory = () => {
   
   return (
     <div>
-      {staffBooking.length > 0 ? (
-        <div className="card-body" style={stylishCardStyle}>
-          <h3>Staff Booking List</h3>
-          <hr/>
-          {staffBooking.map((booking) => (
-            <div key={booking._id}>
-              <p>Booking ID: {booking._id}</p>
-              <p>Amount: {booking.amount}</p>
-              <p>Start Date and Time: {booking.startDateTime}</p>
-              <p>End Date and Time: {booking.endDateTime}</p>
-              <h4>Car Details</h4>
-              <p>Car Name:{booking.carName}</p>
-              <p>Car Model:{booking.model}</p>
-              <p className="card-text">
-                Status: {booking.isStationBooked ? "booked" : "Your booking Slot Expired"}
-              </p>
-             
-            </div>
-          ))}
-        </div>
-      ) : (
-        <h1>No bookings found.</h1>
-      )}  */}
       <Calender bookings={staffBooking} />
     </div>
   )
