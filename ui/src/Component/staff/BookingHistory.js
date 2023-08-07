@@ -28,7 +28,6 @@ const BookingHistrory = () => {
     if (station.length > 0) {
       const stationIds = station.map((ele) => ele._id )
       dispatch(startGetStaffBooking(...stationIds))
-
     }
   }, [dispatch, station]);
 
@@ -42,15 +41,8 @@ const BookingHistrory = () => {
       const customerIds=staffBooking.map(ele=>ele._id)
      dispatch()
     }
-  }, [dispatch, station]);
-  const stylishCardStyle = {
-    border: "1px solid #ccc",
-    borderRadius: "4px",
-    padding: "10px",
-    margin: "10px",
-    backgroundColor: "#f8f8f8",
-    boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
-  };
+  });
+  
   return (
     <div>
       {staffBooking.length > 0 ? (
