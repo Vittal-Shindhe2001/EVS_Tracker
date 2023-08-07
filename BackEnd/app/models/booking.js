@@ -35,6 +35,12 @@ const BookingSchema = new Schema({
     },
     stationName:{
         type:String
+    },
+    carName:{
+        type:String
+    },
+    model:{
+        type:String
     }
 })
 const Booking = mongoose.model('Booking', BookingSchema)
