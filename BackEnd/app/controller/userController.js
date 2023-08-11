@@ -71,10 +71,7 @@ userController.info = async (req, res) => {
     try {
         const user = await User.findOne({ _id: req.user.id })
         // Create a new array of customers with password removed
-        const customersWithoutPassword = user.map((customer) => {
-            const { password, ...customerWithoutPassword } = customer.toObject();
-            return customerWithoutPassword;
-        })
+            const { password, ...customersWithoutPassword } = user.toObject()
         res.json(customersWithoutPassword)
     } catch (error) {
         res.json(error)
