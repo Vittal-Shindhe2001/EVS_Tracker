@@ -49,7 +49,7 @@ const Home = (props) => {
             // src="https://t3.ftcdn.net/jpg/05/77/10/62/240_F_577106282_3B7CPA57xiU58xKv1H6OljGvOXfONHAu.jpg"
             alt="Electric"
             className="img-fluid rounded shadow"
-            style={{ width: "100%", height: "auto", maxWidth: "600px" }}
+            style={{ width: "100%", height: "auto", maxWidth: "600px",mixBlendMode:"darken" }}
           />
         </div>
       </div>

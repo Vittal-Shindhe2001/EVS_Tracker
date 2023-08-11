@@ -82,7 +82,7 @@ export const AllStationD = (props) => {
                 <div className="col-md-8">
 
                 </div>
-                <div className="col-md-2">
+                {/* <div className="col-md-2">
                     <form>
                         <select name="sort" id="sort" className="sort-selection-style" value={sort} onChange={handleSort}>
                             <option value='#' >sort </option>
@@ -90,7 +90,7 @@ export const AllStationD = (props) => {
                             <option value='-1' >z-a</option>
                         </select>
                     </form>
-                </div>
+                </div> */}
             </div>
 
             {display ?

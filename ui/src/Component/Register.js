@@ -96,8 +96,8 @@ const CustomerRegistrationForm = (props) => {
             <div className="card-body ">
               <form onSubmit={handleSubmit}>
                 <div className="mb-3">
-                  <label htmlFor="name" className="form-label">
-                    Name:
+                  <label htmlFor="name"  className='formLabel'>
+                    Name
                   </label>
                   <input
                     type="text"
@@ -111,8 +111,8 @@ const CustomerRegistrationForm = (props) => {
                   )}
                 </div>
                 <div className="mb-3">
-                  <label htmlFor="email" className="form-label">
-                    Email:
+                  <label htmlFor="email"  className='formLabel'>
+                    Email
                   </label>
                   <input
                     type="email"
@@ -126,7 +126,7 @@ const CustomerRegistrationForm = (props) => {
                   )}
                 </div>
                 <div className="mb-3">
-                  <label htmlFor="password" className="form-label">Password:</label>
+                  <label htmlFor="password"  className='formLabel'>Password</label>
                   <input
                     type="password"
                     className="form-control"
@@ -216,8 +216,8 @@ const StaffRegistrationForm = (props) => {
             <div className="card-body ">
               <form onSubmit={handleSubmit}>
                 <div className="mb-3">
-                  <label htmlFor="name" className="form-label">
-                    Name:
+                  <label htmlFor="name"  className='formLabel'>
+                    Name
                   </label>
                   <input
                     type="text"
@@ -231,8 +231,8 @@ const StaffRegistrationForm = (props) => {
                   )}
                 </div>
                 <div className="mb-3">
-                  <label htmlFor="email" className="form-label">
-                    Email:
+                  <label htmlFor="email"  className='formLabel'>
+                    Email
                   </label>
                   <input
                     type="email"
@@ -246,8 +246,8 @@ const StaffRegistrationForm = (props) => {
                   )}
                 </div>
                 <div className="mb-3">
-                  <label htmlFor="password" className="form-label">
-                    Password:
+                  <label htmlFor="password"  className='formLabel'>
+                    Password
                   </label>
                   <input
                     type="password"

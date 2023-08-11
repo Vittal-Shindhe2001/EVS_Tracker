@@ -29,7 +29,6 @@ const BookingHistrory = () => {
     if (station.length > 0) {
       const stationIds = station.map((ele) => ele._id )
       dispatch(startGetStaffBooking(...stationIds))
-
     }
   }, [dispatch, station]);
 
@@ -47,6 +46,7 @@ const BookingHistrory = () => {
   const customers=useSelector((state)=>{
     return state.user.data
   })
+ 
   return (
     <div>
       <Calender bookings={staffBooking} user={customers}/>
