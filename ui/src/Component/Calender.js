@@ -10,17 +10,19 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 
 const Calender = (props) => {
   const [events, setEvents] = useState([])
-  
+
   const getUserName = (id) => {
-      const userMatch = props.user.find(ele => ele._id === id)
+    if (props.user.length > 0) {
+      const userMatch = props.user.find(ele => ele._id.toString() === id)
       return userMatch ? userMatch.name : "Unknown Customer"
+    }
   }
 
 
 
   useEffect(() => {
-    if (Array.isArray(props.bookings)) { 
-      const formattedEvents = props?.bookings.map((ele) => ({
+    if (Array.isArray(props.bookings)) {
+      const formattedEvents = props.bookings.map((ele) => ({
         title: ele.stationName,
         start: ele.startDateTime,
         end: ele.endDateTime,

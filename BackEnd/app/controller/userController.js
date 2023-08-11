@@ -51,8 +51,13 @@ userController.login = async (req, res) => {
 userController.list = async (req, res) => {
     try {
         const users = await User.find()
-        if (users) {
-            res.json(users)
+        // Create a new array of customers with password removed
+        const customersWithoutPassword = users.map((customer) => {
+            const { password, ...customerWithoutPassword } = customer.toObject();
+            return customerWithoutPassword;
+        })
+        if (customersWithoutPassword) {
+            res.json(customersWithoutPassword)
         } else {
             res.json({ error: "Users not Found" })
         }
@@ -65,7 +70,9 @@ userController.list = async (req, res) => {
 userController.info = async (req, res) => {
     try {
         const user = await User.findOne({ _id: req.user.id })
-        res.json(user)
+        // Create a new array of customers with password removed
+            const { password, ...customersWithoutPassword } = user.toObject()
+        res.json(customersWithoutPassword)
     } catch (error) {
         res.json(error)
     }
@@ -91,7 +98,12 @@ userController.staffCustomers=async(req,res)=>{
     try {
         const {id}=req.params
         const customers=await User.find({_id:id})
-        
+        // Create a new array of customers with password removed
+        const customersWithoutPassword = customers.map((customer) => {
+            const { password, ...customerWithoutPassword } = customer.toObject();
+            return customerWithoutPassword;
+        })
+        res.json(customersWithoutPassword)
     } catch (error) {
         res.json(error)
     }

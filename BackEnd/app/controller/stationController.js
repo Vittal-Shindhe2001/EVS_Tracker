@@ -119,15 +119,24 @@ stationController.findOnStaffName = async (req, res) => {
 stationController.search = async (req, res) => {
     try {
         const { name } = req.query
-        console.log(name)
-        const res = await Station.find({
+        const res1 = await Station.find({
             '$or': [
                 { name: { $regex: name, $options: 'i' } },
                 { address: { $regex: name, $options: 'i' } },
             ]
         })
-        console.log(res);
-        res.json(res)
+        res.json(res1)
+    } catch (error) {
+        res.json(error)
+    }
+}
+//sorting
+stationController.sorting=async(req,res)=>{
+    try {
+        const {value}=req.params
+        const sorted=await Station.find().sort({name:value})
+        console.log(sorted)
+        res.json(sorted)
     } catch (error) {
         res.json(error)
     }

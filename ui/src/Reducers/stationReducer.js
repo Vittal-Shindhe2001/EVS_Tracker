@@ -1,5 +1,5 @@
-import { ADD_STATION, DELETE_STATION, EDIT_STATION, GET_STATION, STAFF_STATION } from "../Actions/stationAction";
-const initialStations = { error: "", data: [] }
+import { ADD_STATION, DELETE_STATION, EDIT_STATION, GET_STATION, SEARCH, SORTING_NAME, STAFF_STATION } from "../Actions/stationAction";
+const initialStations = { error: "",search:'',sort:[], data: [] }
 
 export const stationReducer = (state = initialStations, action) => {
     switch (action.type) {
@@ -27,6 +27,12 @@ export const stationReducer = (state = initialStations, action) => {
                 }
             })
             return { ...state, data: result }
+        }
+        case SEARCH:{
+            return{...state,search:action.payload}
+        }
+        case SORTING_NAME:{
+            return{...state,sort:[action.payload]}
         }
         default: {
             return { ...state }
