@@ -59,7 +59,7 @@ const Login = (props) => {
           <h1>Login</h1>
           <div className='card shadow'>
             <div className='card-body'>
-              <form onSubmit={handleLogin}>
+              <form onSubmit={handleLogin} >
                 <div className="mb-3">
                   <label htmlFor="exampleInputEmail1"  className='formLabel'>Email</label>
                   <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value={email}
@@ -73,6 +73,7 @@ const Login = (props) => {
                   {messageError.password && <div><span style={{ color: "red" }}>{messageError.password}</span></div>}
                 </div>
                 <button type="submit" className="btn btn-primary">Submit</button>
+               
               </form>
             </div>
           </div>
