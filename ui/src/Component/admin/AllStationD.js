@@ -6,8 +6,6 @@ import Station from "../Station";
 import { Modal, ModalHeader, ModalBody } from "reactstrap";
 import StationLocation from "./StationLocation";
 
-
-
 export const AllStationD = (props) => {
     const [modal, setModal] = useState(false);
     const [show, setShow] = useState(false);
@@ -34,7 +32,6 @@ export const AllStationD = (props) => {
         if (confirm) {
             dispatch(startDeleteStation(id));
         }
-        // dispatch(startDeleteStation(id))
     };
     //handle Edit station
     const handleEdit = (ele) => {
@@ -60,7 +57,6 @@ export const AllStationD = (props) => {
     //debouncing
     const debouncedChangeHandler = useCallback(
         debounce((newValue) => {
-            console.log(newValue);
             dispatch(setSearchStation(newValue))
         },3000), // The wait time in milliseconds
         [dispatch])
