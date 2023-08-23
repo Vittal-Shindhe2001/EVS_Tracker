@@ -10,7 +10,7 @@ async function updateStationBookingStatus(stationId, isBooked) {
     try {
         await Station.findByIdAndUpdate(stationId, { isStationBooked: isBooked }, { new: true, runValidators: true })
     } catch (error) {
-        res.json(error
+        res.json(error)
     }
 }
 

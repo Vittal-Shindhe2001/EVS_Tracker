@@ -1,17 +1,18 @@
-import React, { useState,useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { useDispatch } from 'react-redux'
 import { startLoginUser } from '../Actions/userActions';
 import { useHistory, withRouter } from 'react-router-dom/cjs/react-router-dom.min';
 const emailFormat = /^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
 const Login = (props) => {
-  const ref=useRef()
+  const ref = useRef()
   const history = useHistory()
   const dispatch = useDispatch()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [messageError, setMessageError] = useState({})
   const error = {}
-  
+  const [check,setChecke]=useState(false)
+
   const validationForm = () => {
     if (email.trim().length === 0) {
       error.email = 'Please Enter Email';
@@ -46,10 +47,9 @@ const Login = (props) => {
   }
 
   //focus input field email
-  useEffect(()=>{
+  useEffect(() => {
     ref.current.focus()
-  },[ref])
-  
+  }, [ref])
 
   return (
     <div className="container">
@@ -61,19 +61,20 @@ const Login = (props) => {
             <div className='card-body'>
               <form onSubmit={handleLogin} >
                 <div className="mb-3">
-                  <label htmlFor="exampleInputEmail1"  className='formLabel'>Email</label>
+                  <label htmlFor="exampleInputEmail1" className='formLabel'>Email</label>
                   <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value={email}
-                    onChange={(e) => setEmail(e.target.value)} ref={ref}/>
+                    onChange={(e) => setEmail(e.target.value)} ref={ref} />
                   {messageError.email && <div> <span style={{ color: "red" }}>{messageError.email}</span></div>}
                 </div>
                 <div className="mb-3 ">
-                  <label htmlFor="exampleInputPassword1"  className='formLabel'>Password</label>
-                  <input type='password' className="form-control" id="exampleInputPassword1" value={password}
+                  <label htmlFor="exampleInputPassword1" className='formLabel'>Password</label>
+                  <input  type={check ? 'text' : 'password'} className="form-control" id="exampleInputPassword1" value={password}
                     onChange={(e) => { setPassword(e.target.value) }} />
+                  <input className="check" checked={check} type="checkbox" onChange={()=>{setChecke(!check)}}/>
                   {messageError.password && <div><span style={{ color: "red" }}>{messageError.password}</span></div>}
                 </div>
                 <button type="submit" className="btn btn-primary">Submit</button>
-               
+
               </form>
             </div>
           </div>
