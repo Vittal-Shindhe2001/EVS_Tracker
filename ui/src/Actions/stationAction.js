@@ -8,7 +8,7 @@ export const DELETE_STATION = 'DELETE_STATION'
 export const STAFF_STATION = 'STAFF_STATION'
 export const EDIT_STATION = 'EDIT_STATION'
 export const SEARCH = 'SEARCH'
-
+export const SORTING_NAME='SORTING_NAME'
 export const setStation = (data) => {
     return {
         type: ADD_STATION,
@@ -163,8 +163,27 @@ export const setSearchStation = (search) => {
         (
             (async () => {
                 const result = await axios.get(`/api/search?name=${search}`, { headers: { 'Authorization': localStorage.getItem('token') } })
-                console.log(result);
+                dispatch(getSearch(result.data))
             })
+        )()
+    }
+}
+//sorting a-z and z-a
+export const setSorted=(data)=>{
+    return{
+        type:SORTING_NAME,
+        payload:data
+    }
+}
+
+export const startStationName=(value)=>{
+    return(dispatch)=>{
+        (
+            async()=>{
+                const sort=await axios.get(`/api/station/sorting/${value}`,{headers:{'Authorization':localStorage.getItem('token')}})
+                dispatch(setSorted(sort.data))
+              
+            }
         )()
     }
 }

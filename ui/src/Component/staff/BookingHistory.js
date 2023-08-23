@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { startGetStaffBooking } from "../../Actions/bookingAction";
 import { startStaffStation } from "../../Actions/stationAction";
 import Calender from "../Calender";
+import { startGetStationUsers } from "../../Actions/userActions";
 
 
 const BookingHistrory = () => {
@@ -38,14 +39,17 @@ const BookingHistrory = () => {
   //useInfo staff releated station
   useEffect(()=>{
     if (staffBooking.length >0) {
-      const customerIds=staffBooking.map(ele=>ele._id)
-     dispatch()
+      const customerIds=staffBooking.map(ele=>ele.customerId)
+     dispatch(startGetStationUsers(...customerIds))
     }
-  });
-  
+  },[dispatch,staffBooking])
+  const customers=useSelector((state)=>{
+    return state.user.data
+  })
+ 
   return (
     <div>
-      <Calender bookings={staffBooking} />
+      <Calender bookings={staffBooking} user={customers}/>
     </div>
   )
 }

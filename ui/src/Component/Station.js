@@ -125,37 +125,40 @@ const Station = (props) => {
             <div className="card shodow" >
                 <div className="card-body">
                     <form onSubmit={handleSubmit}>
-                        <div>
-                            <label htmlFor="name" className="form-label text-left" >Name</label>
+                       <div>
+                            <label className='formLabel'>Name</label>
                             <input
                                 type="text"
                                 id="name"
                                 value={name}
                                 className="form-control inputBorder"
                                 onChange={(e) => setName(e.target.value)}
+                                placeholder='Enter Your Station Name'
                             />
                             {errors.name && <div className="text-danger">{errors.name}</div>}
-                        </div>
+                            </div>
                         
                         <div>
-                            <label htmlFor="address">Address</label>
+                            <label  className='formLabel'>Address</label>
                             <input
                                 type="text"
                                 id="address"
                                 value={address}
                                 className="form-control"
+                                placeholder='Enter Your Sattion Address'
                                 onChange={(e) => setAddress(e.target.value)}   
                             />
                             {errors.address && <div className="text-danger">{errors.address}</div>}
                         </div>
                         <div>
-                            <label htmlFor="landmark">Landmark</label>
+                            <label  className='formLabel'>Landmark</label>
                             <input
                                 type="text"
                                 id="landmark"
                                 value={landmark}
                                 className="form-control"
                                 onChange={(e) => setLandmark(e.target.value)}
+                                placeholder='Enter Landmark'
                                 
                             />
                             {errors.landmark && <div className="text-danger">{errors.landmark}</div>}
@@ -173,7 +176,7 @@ const Station = (props) => {
                         {latitude && longitude && <h5>Latitude:{latitude},Longitude:{longitude}  </h5>}
                         {errors.location && <div className="text-danger">{errors.location}</div>}
                         <div>
-                            <label className="form-label labelFont" >ChargingOptions(portTypes)</label>
+                            <label  className='formLabel' >ChargingOptions(portTypes)</label>
                             {chargingOptions.map((option, index) => (
                                 <div key={index} className="input-group mb-3">
                                      <input
@@ -208,13 +211,14 @@ const Station = (props) => {
                         </div>
                            
                         <div>
-                            <label htmlFor="staff">Staff</label>
+                            <label  className='formLabel' >Staff</label>
                             <input
                                 type="text"
                                 id="staff"
                                 value={staff}
                                 className="form-control"
                                 onChange={(e) => setStaff(e.target.value)}
+                                placeholder='Enter Staff Name'
                             />
                         </div>
 
