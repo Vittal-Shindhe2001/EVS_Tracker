@@ -1,4 +1,4 @@
-import React, { useState,useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { startRegisterUser } from "../Actions/userActions";
 const emailFormat = /^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
@@ -39,13 +39,13 @@ const RegistrationForm = (props) => {
 };
 
 const CustomerRegistrationForm = (props) => {
- const ref=useRef()
+  const ref = useRef()
   const dispatch = useDispatch();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [messageError, setMessageError] = useState({});
-
+  const [check,setChecke]=useState(false)
   const formData = {
     name: name,
     email: email,
@@ -70,9 +70,9 @@ const CustomerRegistrationForm = (props) => {
 
     return error;
   }
-  useEffect(()=>{
+  useEffect(() => {
     ref.current.focus()
-  },[ref])
+  }, [ref])
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -90,13 +90,13 @@ const CustomerRegistrationForm = (props) => {
     <div className="container-fuild">
       <div className="row">
         <div className="col-md-4"></div>
-        <div className="col-md-4">
+        <div className=" col-md-4">
           <h2>Customer Registration</h2>
           <div className="card shadow">
             <div className="card-body ">
               <form onSubmit={handleSubmit}>
                 <div className="mb-3">
-                  <label htmlFor="name"  className='formLabel'>
+                  <label htmlFor="name" className='formLabel'>
                     Name
                   </label>
                   <input
@@ -105,13 +105,13 @@ const CustomerRegistrationForm = (props) => {
                     id="name"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
-                  ref={ref}/>
+                    ref={ref} />
                   {messageError.userName && (
                     <div className="text-danger">{messageError.userName}</div>
                   )}
                 </div>
                 <div className="mb-3">
-                  <label htmlFor="email"  className='formLabel'>
+                  <label htmlFor="email" className='formLabel'>
                     Email
                   </label>
                   <input
@@ -126,14 +126,15 @@ const CustomerRegistrationForm = (props) => {
                   )}
                 </div>
                 <div className="mb-3">
-                  <label htmlFor="password"  className='formLabel'>Password</label>
+                  <label htmlFor="password" className='formLabel'>Password</label>
                   <input
-                    type="password"
+                    type={check ? 'text' : 'password'}
                     className="form-control"
                     id="password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                   />
+                  <input className="check" checked={check} type="checkbox" onChange={()=>{setChecke(!check)}}/>
                   {messageError.password && (
                     <div className="text-danger">{messageError.password}</div>
                   )}
@@ -158,7 +159,7 @@ const StaffRegistrationForm = (props) => {
   const [messageError, setMessageError] = useState({});
   const [isChecked, setIsChecked] = useState(false);
   const [role, setRole] = useState("");
-
+  const [checkBox,setChecke]=useState(false)
   const handleCheckboxChange = (e) => {
     setIsChecked(e.target.checked);
     if (e.target.checked) {
@@ -216,7 +217,7 @@ const StaffRegistrationForm = (props) => {
             <div className="card-body ">
               <form onSubmit={handleSubmit}>
                 <div className="mb-3">
-                  <label htmlFor="name"  className='formLabel'>
+                  <label htmlFor="name" className='formLabel'>
                     Name
                   </label>
                   <input
@@ -231,7 +232,7 @@ const StaffRegistrationForm = (props) => {
                   )}
                 </div>
                 <div className="mb-3">
-                  <label htmlFor="email"  className='formLabel'>
+                  <label htmlFor="email" className='formLabel'>
                     Email
                   </label>
                   <input
@@ -246,16 +247,17 @@ const StaffRegistrationForm = (props) => {
                   )}
                 </div>
                 <div className="mb-3">
-                  <label htmlFor="password"  className='formLabel'>
+                  <label htmlFor="password" className='formLabel'>
                     Password
                   </label>
                   <input
-                    type="password"
+                     type={checkBox ? 'text' : 'password'}
                     className="form-control"
                     id="password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                   />
+                  <input className="check" checked={checkBox} type="checkbox" onChange={()=>{setChecke(!checkBox)}}/>
                   {messageError.password && (
                     <div className="text-danger">{messageError.password}</div>
                   )}

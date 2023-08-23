@@ -10,12 +10,12 @@ const Station = (props) => {
     const [landmark, setLandmark] = useState('')
     const [latitude, setLatitude] = useState('')
     const [longitude, setLongitude] = useState('')
-    const [chargingOptions, setChargingOptions] = useState([{ portType: '',price:'' }])
+    const [chargingOptions, setChargingOptions] = useState([{ portType: '', price: '' }])
     const [staff, setStaff] = useState('')
     const [chargingOptionId, setChargingOptionIds] = useState('')
     const [showMap, setShowMap] = useState(false)
     const [errors, setErrors] = useState({});
-    
+
     useEffect(() => {
         if (props.data) {
             setName(props.data.name || "")
@@ -23,7 +23,7 @@ const Station = (props) => {
             setLandmark(props.data.landmark || "")
             setLatitude(props.data.geo.latitude || "")
             setLongitude(props.data.geo.longitude || "")
-            setChargingOptions(props.data.chargingOptions || [{ portType: "",price:"" }])
+            setChargingOptions(props.data.chargingOptions || [{ portType: "", price: "" }])
             setStaff(props.data.staff || "")
             // Extract chargingOptions IDs
             const chargingOptionIds = props.data.chargingOptions.map((option) => option._id)
@@ -33,14 +33,14 @@ const Station = (props) => {
 
     const dispatch = useDispatch()
 
-    const handleChangeOption = (index,field,value) => {
-            console.log(value);
-            const options = [...chargingOptions]
-            options[index][field]= value
-            setChargingOptions(options)
-        }
+    const handleChangeOption = (index, field, value) => {
+        console.log(value);
+        const options = [...chargingOptions]
+        options[index][field] = value
+        setChargingOptions(options)
+    }
     const handleAddOption = () => {
-        setChargingOptions([...chargingOptions, { portType: '',price:'' }])
+        setChargingOptions([...chargingOptions, { portType: '', price: '' }])
     }
 
     const handleRemoveOption = (index) => {
@@ -51,68 +51,68 @@ const Station = (props) => {
 
     const formValidation = () => {
         const error = {};
-    
+
         if (name.trim().length === 0) {
-          error.name = 'Please enter a name';
+            error.name = 'Please enter a name';
         }
         if (address.trim().length === 0) {
-          error.address = 'Please enter an address';
+            error.address = 'Please enter an address';
         }
         if (landmark.trim().length === 0) {
-          error.landmark = 'Please enter a landmark';
+            error.landmark = 'Please enter a landmark';
         }
         if (!latitude || !longitude) {
-          error.location = 'Please select the location on the map';
+            error.location = 'Please select the location on the map';
         }
-    
+
         const validChargingOptions = chargingOptions.filter((option) => option.portType.trim() !== '');
         if (validChargingOptions.length === 0) {
-          error.chargingOptions = 'Please provide at least one charging option';
+            error.chargingOptions = 'Please provide at least one charging option';
         }
-    
+
         setErrors(error);
         return Object.keys(error).length === 0;
-      };
-      
+    };
+
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        
+
         if (formValidation()) {
-            
+
             //Create  object with the form data
             const formData = {
-              name,
-              address,
-              landmark,
-              geo: {
-                latitude,
-                longitude,
-              },
-              chargingOptions,
-              staff,
+                name,
+                address,
+                landmark,
+                geo: {
+                    latitude,
+                    longitude,
+                },
+                chargingOptions,
+                staff,
             };
-           
-        // Reset the form
-        const resetForm = () => {
-            setName('')
-            setAddress('')
-            setLandmark('')
-            setLatitude('')
-            setLongitude('')
-            setChargingOptions([{ portType: '', price: '' }])
-            setStaff('')
-        }
 
-        // send it to a server
-        if (props.data) {
-            dispatch(StartEditStation(props.data._id, chargingOptionId, formData))
-            props.toggle()
-        } else {
-            dispatch(startRegisterStation(formData, resetForm))
+            // Reset the form
+            const resetForm = () => {
+                setName('')
+                setAddress('')
+                setLandmark('')
+                setLatitude('')
+                setLongitude('')
+                setChargingOptions([{ portType: '', price: '' }])
+                setStaff('')
+            }
+
+            // send it to a server
+            if (props.data) {
+                dispatch(StartEditStation(props.data._id, chargingOptionId, formData))
+                props.toggle()
+            } else {
+                dispatch(startRegisterStation(formData, resetForm))
+            }
         }
     }
-}
 
     // //LOCATION 
     const location = (latitude, longitude) => {
@@ -124,8 +124,8 @@ const Station = (props) => {
         <div className="container">
             <div className="card shodow" >
                 <div className="card-body">
-                    <form onSubmit={handleSubmit}>
-                       <div>
+                    <form onSubmit={handleSubmit} >
+                        <div>
                             <label className='formLabel'>Name</label>
                             <input
                                 type="text"
@@ -136,22 +136,21 @@ const Station = (props) => {
                                 placeholder='Enter Your Station Name'
                             />
                             {errors.name && <div className="text-danger">{errors.name}</div>}
-                            </div>
-                        
+                        </div>
                         <div>
-                            <label  className='formLabel'>Address</label>
+                            <label className='formLabel'>Address</label>
                             <input
                                 type="text"
                                 id="address"
                                 value={address}
                                 className="form-control"
                                 placeholder='Enter Your Sattion Address'
-                                onChange={(e) => setAddress(e.target.value)}   
+                                onChange={(e) => setAddress(e.target.value)}
                             />
                             {errors.address && <div className="text-danger">{errors.address}</div>}
                         </div>
                         <div>
-                            <label  className='formLabel'>Landmark</label>
+                            <label className='formLabel'>Landmark</label>
                             <input
                                 type="text"
                                 id="landmark"
@@ -159,7 +158,7 @@ const Station = (props) => {
                                 className="form-control"
                                 onChange={(e) => setLandmark(e.target.value)}
                                 placeholder='Enter Landmark'
-                                
+
                             />
                             {errors.landmark && <div className="text-danger">{errors.landmark}</div>}
                         </div>
@@ -176,18 +175,18 @@ const Station = (props) => {
                         {latitude && longitude && <h5>Latitude:{latitude},Longitude:{longitude}  </h5>}
                         {errors.location && <div className="text-danger">{errors.location}</div>}
                         <div>
-                            <label  className='formLabel' >ChargingOptions(portTypes)</label>
+                            <label className='formLabel' >ChargingOptions(portTypes)</label>
                             {chargingOptions.map((option, index) => (
                                 <div key={index} className="input-group mb-3">
-                                     <input
-                                     placeholder='Port'
+                                    <input
+                                        placeholder='Port'
                                         type="text"
                                         className="form-control"
                                         value={option.portType}
                                         onChange={(e) => handleChangeOption(index, 'portType', e.target.value)}
                                     />
                                     <input
-                                    placeholder='Price'
+                                        placeholder='Price'
                                         type="text"
                                         className="form-control"
                                         value={option.price}
@@ -205,13 +204,13 @@ const Station = (props) => {
                             <button type="button" className="btn btn-primary" onClick={handleAddOption}>
                                 Add Option
                             </button>
- 
-                                    
+
+
                             {errors.chargingOptions && <div className="text-danger">{errors.chargingOptions}</div>}
                         </div>
-                           
+
                         <div>
-                            <label  className='formLabel' >Staff</label>
+                            <label className='formLabel' >Staff</label>
                             <input
                                 type="text"
                                 id="staff"

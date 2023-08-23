@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState,useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { startDeleteStation, startGetAllStations, setSearchStation, startStationName } from "../../Actions/stationAction";
+import debounce from 'lodash.debounce';
+import { startDeleteStation, startGetAllStations, setSearchStation } from "../../Actions/stationAction";
 import Station from "../Station";
 import { Modal, ModalHeader, ModalBody } from "reactstrap";
 import StationLocation from "./StationLocation";
-
-
 
 export const AllStationD = (props) => {
     const [modal, setModal] = useState(false);
@@ -18,13 +17,11 @@ export const AllStationD = (props) => {
     const [location, setLocation] = useState({});
     const [search, setSearch] = useState('')
     const [display, setDisplay] = useState(false)
-    const [sort,setSort]=useState('')
-    const [sorted,setSorted]=useState(false)
     const dispatch = useDispatch();
 
     useEffect(() => {
         dispatch(startGetAllStations());
-    }, [dispatch, search]);
+    }, [dispatch,search]);
 
     const station = useSelector((state) => {
         return state;
@@ -35,7 +32,6 @@ export const AllStationD = (props) => {
         if (confirm) {
             dispatch(startDeleteStation(id));
         }
-        // dispatch(startDeleteStation(id))
     };
     //handle Edit station
     const handleEdit = (ele) => {
@@ -55,14 +51,16 @@ export const AllStationD = (props) => {
     const handleSearch = (e) => {
         setDisplay(true)
         setSearch(e.target.value)
-        dispatch(setSearchStation(search))
+        debouncedChangeHandler(e.target.value);
+        //   dispatch(setSearchStation(search))
     }
-    //sorting 
-    const handleSort=(e)=>{
-        setSorted(!sort)
-        setSort(e.target.value)
-        dispatch(startStationName(sort))
-    }
+    //debouncing
+    const debouncedChangeHandler = useCallback(
+        debounce((newValue) => {
+            dispatch(setSearchStation(newValue))
+        },3000), // The wait time in milliseconds
+        [dispatch])
+    
     return (
         <div className="card-container">
 
@@ -82,15 +80,6 @@ export const AllStationD = (props) => {
                 <div className="col-md-8">
 
                 </div>
-                {/* <div className="col-md-2">
-                    <form>
-                        <select name="sort" id="sort" className="sort-selection-style" value={sort} onChange={handleSort}>
-                            <option value='#' >sort </option>
-                            <option value='1' >a-z</option>
-                            <option value='-1' >z-a</option>
-                        </select>
-                    </form>
-                </div> */}
             </div>
 
             {display ?

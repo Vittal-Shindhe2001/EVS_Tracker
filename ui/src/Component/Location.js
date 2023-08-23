@@ -1,5 +1,5 @@
 
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useRef, useEffect } from 'react';
 import L from 'leaflet';
 
 const Location = (props) => {
@@ -68,7 +68,7 @@ const Location = (props) => {
       newMap.remove();
       markerRef.current.remove();
     };
-  }, []);
+  },[]);
 
   const handleMapClick = (event) => {
     if (markerRef.current) {
