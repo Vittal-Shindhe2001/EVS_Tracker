@@ -5,12 +5,13 @@ import NavBar from './Component/NavBar'
 
 
 
+
 function App() {
   return (
     <div className="App">
-     {/* <StationLocation /> */}
-      <NavBar />
-    
+   
+      <NavBar /> 
+    {/* <Page404 /> */}
     </div>
   );
 }
