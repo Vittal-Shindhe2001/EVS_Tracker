@@ -49,7 +49,7 @@ const History = () => {
               <p className="card-text">Start: {booking.startDateTime}</p>
               <p className="card-text">End: {booking.endDateTime}</p>
               <p className="card-text">
-                Status: {booking.isStationBooked ? "booked" : "Your booking Slot Expired"}
+                Status: {booking.isBooked ? "Booked" : "Your booking Slot Expired"}
               </p>
             </div>
           </div>

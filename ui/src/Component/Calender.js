@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
 import FullCalendar from '@fullcalendar/react'
 import dayGridPlugin from '@fullcalendar/daygrid'
 import timeGridPlugin from '@fullcalendar/timegrid'
@@ -18,7 +17,7 @@ const Calender = (props) => {
     }
   }
 
-
+  // <strong>CustomerName:</strong>${info.event.extendedProps.customer} <br/>
 
   useEffect(() => {
     if (Array.isArray(props.bookings)) {
@@ -66,7 +65,6 @@ const Calender = (props) => {
       trigger: 'manual', // Use manual trigger to control show/hide manually
       customClass: 'popoverStyle',
       content: `<p>
-      <strong>CustomerName:</strong>${info.event.extendedProps.customer} <br/>
       <strong>StartDateTime:</strong>${info.event.start} <br/>
        <strong>EndDateTime:</strong>${info.event.end} <br/>
        <strong>Amount:</strong>${info.event.extendedProps.amount} <br/>
@@ -88,7 +86,6 @@ const Calender = (props) => {
         plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
         initialView="dayGridMonth"
         dayMaxEvents={true}
-        // timeZone= 'GMT'
         themeSystem="bootstrap5"
         headerToolbar={{
           left: 'prev,next today',
