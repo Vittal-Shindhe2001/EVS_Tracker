@@ -4,7 +4,7 @@ import { MapContainer, TileLayer, Marker } from "react-leaflet";
 import L from "leaflet";
 
 const StationLocation = (props) => {
-  const [currentLocation, setCurrentLocation] = useState([props.data.latitude,props.data.longitude]);
+  const [currentLocation] = useState([props.data.latitude,props.data.longitude]);
   const containerStyle = {
     height: "100vh",
     width: "100%",

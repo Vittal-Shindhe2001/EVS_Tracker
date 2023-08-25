@@ -28,12 +28,12 @@ const Booking = (props) => {
   //SET PRICE OF THE PORT DEFAULT
   const price = () => {
     if (station) {
-      const price = station.chargingOptions.map((ele) => {
-        if (ele._id === port) {
-          return ele.price;
-        }
+      const price = station.chargingOptions.find(ele => {
+        return ele._id === port
       });
-      setPricePortType(price);
+      if (price) {
+        setPricePortType(price.price)
+      }
     }
   };
   // station id set to stationId state
@@ -59,7 +59,7 @@ const Booking = (props) => {
     calculateAmount();
     stationsId();
     price();
-  }, [port, startDateTime, endDateTime]);
+  }, [port, startDateTime, endDateTime, price]);
 
   const formValidation = () => {
     const errors = {};
@@ -126,141 +126,149 @@ const Booking = (props) => {
   };
 
   return (
-    <div className="card-body" style={stylishCardStyle}>
-      <h2>Station Details</h2>
-      <h5 className="card-title">
-        <strong>Station Name:</strong>
-        {station.name}
-      </h5>
-      <p className="card-text">
-        <strong>Address:</strong> {station.address}
-      </p>
-      <p className="card-text">
-        <strong>Landmark:</strong> {station.landmark}
-      </p>
-      <p className="card-text">
-        <strong>Staff:</strong> {station.staff}
-      </p>
-
-      <div className="row justify-content-center">
-        <div className="col-md-4">
+    <div className="container">
+      <div className="row">
+        <div className="col-md-12">
           <div className="card shadow">
             <div className="card-body">
-              <h1 className="card-title text-center mb-4">Book Your Slot</h1>
-              <form onSubmit={handleBooking}>
-                <div className="mb-3">
-                  <label className="form-label">Car Name</label>
-                  <br />
-                  <input
-                    type="String"
-                    className={`form-control ${
-                      errors.carName ? "is-invalid" : ""
-                    }`}
-                    placeholder="Car Name"
-                    value={carName}
-                    onChange={(e) => setCarName(e.target.value)}
-                  />
-                  {errors.carName && (
-                    <div className="invalid-feedback">{errors.carName}</div>
-                  )}
-                </div>
-                <div className="mb-3">
-                  <label className="from-label">Select the the Car type</label>
-                  <select
-                    className={`form-select ${
-                      errors.model ? "is-invalid" : ""
-                    }`}
-                    value={model}
-                    onChange={(e) => setModel(e.target.value)}
-                  >
-                    <option value="">Select Car Type</option>
-                    <option value="SUV">SUV</option>
-                    <option value="Sedan">Sedan</option>
-                    <option value="MUV">MUV</option>
-                    <option value="other">Others</option>
-                  </select>
-                  {errors.model && (
-                    <div className="invalid-feedback">{errors.model}</div>
-                  )}
-                </div>
-                <div className="mb-3">
-                  <label className="form-label">Choose your Port type</label>
-                  <select
-                    className={`form-select ${errors.port ? "is-invalid" : ""}`}
-                    value={port}
-                    onChange={(e) => setPort(e.target.value)}
-                  >
-                    <option value="">Select Port</option>
-                    {station.chargingOptions.map((chargingOption) => (
-                      <option
-                        key={chargingOption._id}
-                        value={chargingOption._id}
-                      >
-                        {chargingOption.portType}
-                      </option>
-                    ))}
-                  </select>
-                  {errors.port && (
-                    <div className="invalid-feedback">{errors.port}</div>
-                  )}
-                </div>
-                <div className="mb-3">
-                  <label className="form-label">Start Date and Time:</label>
-                  <input
-                    type="datetime-local"
-                    className={`form-control ${
-                      errors.startDateTime ? "is-invalid" : ""
-                    }`}
-                    value={startDateTime}
-                    onChange={(e) => {
-                      setStartDateTime(e.target.value);
-                      calculateAmount();
-                    }}
-                  />
-                  {errors.startDateTime && (
-                    <div className="invalid-feedback">
-                      {errors.startDateTime}
+              <h2>Station Details</h2>
+              <h5 className="card-title">
+                <strong>Station Name:</strong>
+                {station.name}
+              </h5>
+              <p className="card-text">
+                <strong>Address:</strong> {station.address}
+              </p>
+              <p className="card-text">
+                <strong>Landmark:</strong> {station.landmark}
+              </p>
+              <p className="card-text">
+                <strong>Staff:</strong> {station.staff}
+              </p>
+            </div>
+           
+          </div>
+        </div>
+      </div>
+      <div className="container" style={{marginTop:"10px"}}>
+        <div className="col-md-2"></div>
+        <div className="row justify-content-center">
+          <div className="col-md-6">
+            <div className="card shadow">
+              <div className="card-body">
+                <h1 className="card-title text-center mb-4">Book Your Slot</h1>
+                <form onSubmit={handleBooking}>
+                  <div className="mb-3">
+                    <label className="form-label">Car Name</label>
+                    <br />
+                    <input
+                      type="String"
+                      className={`form-control ${errors.carName ? "is-invalid" : ""
+                        }`}
+                      placeholder="Car Name"
+                      value={carName}
+                      onChange={(e) => setCarName(e.target.value)}
+                    />
+                    {errors.carName && (
+                      <div className="invalid-feedback">{errors.carName}</div>
+                    )}
+                  </div>
+                  <div className="mb-3">
+                    <label className="from-label">Select the the Car type</label>
+                    <select
+                      className={`form-select ${errors.model ? "is-invalid" : ""
+                        }`}
+                      value={model}
+                      onChange={(e) => setModel(e.target.value)}
+                    >
+                      <option value="">Select Car Type</option>
+                      <option value="SUV">SUV</option>
+                      <option value="Sedan">Sedan</option>
+                      <option value="MUV">MUV</option>
+                      <option value="other">Others</option>
+                    </select>
+                    {errors.model && (
+                      <div className="invalid-feedback">{errors.model}</div>
+                    )}
+                  </div>
+                  <div className="mb-3">
+                    <label className="form-label">Choose your Port type</label>
+                    <select
+                      className={`form-select ${errors.port ? "is-invalid" : ""}`}
+                      value={port}
+                      onChange={(e) => setPort(e.target.value)}
+                    >
+                      <option value="">Select Port</option>
+                      {station.chargingOptions.map((chargingOption) => (
+                        <option
+                          key={chargingOption._id}
+                          value={chargingOption._id}
+                        >
+                          {chargingOption.portType}
+                        </option>
+                      ))}
+                    </select>
+                    {errors.port && (
+                      <div className="invalid-feedback">{errors.port}</div>
+                    )}
+                  </div>
+                  <div className="mb-3">
+                    <label className="form-label">Start Date and Time:</label>
+                    <input
+                      type="datetime-local"
+                      className={`form-control ${errors.startDateTime ? "is-invalid" : ""
+                        }`}
+                      value={startDateTime}
+                      onChange={(e) => {
+                        setStartDateTime(e.target.value);
+                        calculateAmount();
+                      }}
+                    />
+                    {errors.startDateTime && (
+                      <div className="invalid-feedback">
+                        {errors.startDateTime}
+                      </div>
+                    )}
+                  </div>
+                  <div className="mb-3">
+                    <label className="form-label">End Date and Time:</label>
+                    <input
+                      type="datetime-local"
+                      className={`form-control ${errors.endDateTime ? "is-invalid" : ""
+                        }`}
+                      value={endDateTime}
+                      onChange={(e) => {
+                        setEndDateTime(e.target.value);
+                        calculateAmount();
+                      }}
+                    />
+                    {errors.endDateTime && (
+                      <div className="invalid-feedback">{errors.endDateTime}</div>
+                    )}
+                  </div>
+                  {startDateTime && endDateTime && (
+                    <div className="mb-3">
+                      <label className="form-label">Amount</label>
+                      <input
+                        type="text"
+                        className="form-control"
+                        value={ratePerMinute}
+                        disabled
+                      />
                     </div>
                   )}
-                </div>
-                <div className="mb-3">
-                  <label className="form-label">End Date and Time:</label>
-                  <input
-                    type="datetime-local"
-                    className={`form-control ${
-                      errors.endDateTime ? "is-invalid" : ""
-                    }`}
-                    value={endDateTime}
-                    onChange={(e) => {
-                      setEndDateTime(e.target.value);
-                      calculateAmount();
-                    }}
-                  />
-                  {errors.endDateTime && (
-                    <div className="invalid-feedback">{errors.endDateTime}</div>
-                  )}
-                </div>
-                {startDateTime && endDateTime && (
-                  <div className="mb-3">
-                    <label className="form-label">Amount</label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      value={ratePerMinute}
-                      disabled
-                    />
+                  <div className="text-center">
+                    <button type="submit" className="btn btn-primary">
+                      Book Now
+                    </button>
                   </div>
-                )}
-                <div className="text-center">
-                  <button type="submit" className="btn btn-primary">
-                    Book Now
-                  </button>
-                </div>
-              </form>
+                </form>
+              </div>
             </div>
           </div>
         </div>
       </div>
+      <div className="col-md-2"></div>
     </div>
   );
 };
