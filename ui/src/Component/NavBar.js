@@ -21,7 +21,7 @@ const StaffDashBoard = React.lazy(() => import('./staff/StaffDashBoard'))
 const BookingHistrory = React.lazy(() => import('./staff/BookingHistory'))
 const History = React.lazy(() => import('./customer/History'))
 const AccountDelete = React.lazy(() => import('./customer/AccountDelete'))
-const Page404=React.lazy(()=>import('./Page_404'))
+const Page404 = React.lazy(() => import('./Page_404'))
 const Navbar = (props) => {
 
     let token = localStorage.getItem('token')
@@ -185,40 +185,40 @@ const Navbar = (props) => {
                     </div>
                 }
             </nav>
-            <Suspense fallback={<Loding/>}>
-            <Route path='/' component={Home} exact={true} />
-            <Route path='/register' component={RegistrationForm} exact={true}/>
-            <Route path='/login' exact={true}
-                render={(props) => (
-                    <Login {...props} />
-                )} />
+            <Suspense fallback={<Loding />}>
+                <Route path='/' component={Home} exact={true} />
+                <Route path='/register' component={RegistrationForm} exact={true} />
+                <Route path='/login' exact={true}
+                    render={(props) => (
+                        <Login {...props} />
+                    )} />
             </Suspense>
             {token && tokendata.role === 'admin' && <div>
-                <Suspense fallback={<Loding/>}>
-                    <PrivateRoute path='/dashboard' component={DashBoard} exact={true}/>
-                    <PrivateRoute path='/account' component={Account} exact={true}/>
-                    <PrivateRoute path='/history' component={HistoryA} exact={true}/>
-                    
+                <Suspense fallback={<Loding />}>
+                    <PrivateRoute path='/dashboard' component={DashBoard} exact={true} />
+                    <PrivateRoute path='/account' component={Account} exact={true} />
+                    <PrivateRoute path='/history' component={HistoryA} exact={true} />
+
                 </Suspense>
             </div>}
             {token && tokendata.role === 'Customer' &&
                 <div>
-                    <Suspense fallback={<Loding/>}>
-                        <PrivateRoute path='/map' component={Map} exact={true}/>
-                        <PrivateRoute path='/booking' component={Booking} exact={true}/>
-                        <PrivateRoute path='/history' component={History} exact={true}/>
-                        <PrivateRoute path='/setting' component={AccountDelete} exact={true}/>
-                        
+                    <Suspense fallback={<Loding />}>
+                        <PrivateRoute path='/map' component={Map} exact={true} />
+                        <PrivateRoute path='/booking' component={Booking} exact={true} />
+                        <PrivateRoute path='/history' component={History} exact={true} />
+                        <PrivateRoute path='/setting' component={AccountDelete} exact={true} />
+
                     </Suspense>
                 </div>
 
             }
             {token && tokendata.role === 'staff' && <div>
-                <Suspense fallback={<Loding/>}>
-                    <PrivateRoute path='/dashBoard' component={StaffDashBoard} exact={true}/>
-                    <PrivateRoute path='/allBooking' component={BookingHistrory} exact={true}/>
-                    <PrivateRoute path='/booking' component={Booking} exact={true}/>
-                   
+                <Suspense fallback={<Loding />}>
+                    <PrivateRoute path='/dashBoard' component={StaffDashBoard} exact={true} />
+                    <PrivateRoute path='/allBooking' component={BookingHistrory} exact={true} />
+                    <PrivateRoute path='/booking' component={Booking} exact={true} />
+
                 </Suspense>
             </div>
             }

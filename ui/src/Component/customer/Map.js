@@ -8,7 +8,7 @@ import { startGetAllStations } from "../../Actions/stationAction";
 const Map = (props) => {
 
   const [currentLocation, setCurrentLocation] = useState(null);
- 
+
   const dispatch = useDispatch();
   useEffect(() => {
     if (navigator.geolocation) {
@@ -44,7 +44,7 @@ const Map = (props) => {
     iconSize: [30, 30],
   });
   const handleBooking = (station) => {
-    
+
     if (window.confirm("You want to book the slot")) {
       props.history.push({
         pathname: "/booking",
@@ -71,7 +71,7 @@ const Map = (props) => {
             <Popup>My current Location</Popup>
           </Marker>
 
-          {chargingStations.map((station,i) => (
+          {chargingStations.map((station, i) => (
             <Marker
               position={[station.geo.latitude, station.geo.longitude]}
               icon={stationMarkerIcon}
@@ -85,17 +85,17 @@ const Map = (props) => {
                 Staff-{station.staff}
                 <br />
                 Charging ports -{" "}
-                {station.chargingOptions.map((ports,i) => {
+                {station.chargingOptions.map((ports, i) => {
                   return <b key={i} ><li>{ports.portType}</li></b>;
                 })}
                 <br />
-                  <button
-                    type="button"
-                    className=" bookingButtonclr"
-                    onClick={() => handleBooking(station)}
-                  >
-                    Book Now
-                  </button>
+                <button
+                  type="button"
+                  className=" bookingButtonclr"
+                  onClick={() => handleBooking(station)}
+                >
+                  Book Now
+                </button>
               </Popup>
             </Marker>
           ))}
