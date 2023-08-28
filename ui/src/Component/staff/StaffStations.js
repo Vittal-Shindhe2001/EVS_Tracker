@@ -1,11 +1,18 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { startStaffStation } from "../../Actions/stationAction";
 import jwtDecode from "jwt-decode";
 import { useHistory } from "react-router-dom";
 import axios from "../../confi_axios/axios";
+import StationLocation from "../admin/StationLocation";
+import { Modal, ModalHeader, ModalBody } from "reactstrap";
 
 const StaffStations = (props) => {
+    const [location, setLocation] = useState('')
+    const [modal, setModal] = useState(false)
+    const toggle = () => {
+        setModal(!modal)
+    }
     const history = useHistory();
     const token = localStorage.getItem('token');
     let tokendata;
@@ -32,9 +39,12 @@ const StaffStations = (props) => {
     }
 
     const handleLocation = async (ele) => {
-        const result = await axios.get(`https://api.opencagedata.com/geocode/v1/json?q=${ele.latitude}+${ele.longitude}&key=21f121c390e64295a445928b4d642f54`);
-        const res = (result.data.results.map(ele => ele.components.city));
-        alert(res);
+        toggle();
+        setLocation(ele);
+
+        // const result = await axios.get(`https://api.opencagedata.com/geocode/v1/json?q=${ele.latitude}+${ele.longitude}&key=21f121c390e64295a445928b4d642f54`);
+        // const res = (result.data.results.map(ele => ele.components.city));
+        // alert(res);
     }
 
     return (
@@ -76,8 +86,16 @@ const StaffStations = (props) => {
                     </div>
                 </div>
             </div>
+            {modal && <Modal isOpen={modal} toggle={toggle}>
+                <ModalHeader toggle={toggle}>Station Location</ModalHeader>
+                <ModalBody>
+                    <div className="col-md-12">
+                        <StationLocation data={location} />
+                    </div>
+                </ModalBody>
+            </Modal>}
         </div>
     )
 }
 
-export default StaffStations;
+export default StaffStations;

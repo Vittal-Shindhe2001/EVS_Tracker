@@ -7,7 +7,6 @@ const stationController = {}
 stationController.create = async (req, res) => {
     try {
         const body = req.body
-        console.log(body);
         const station = new Station(body)
         const res = await station.save()
         if (res) {
@@ -135,7 +134,6 @@ stationController.sorting=async(req,res)=>{
     try {
         const {value}=req.params
         const sorted=await Station.find().sort({name:value})
-        console.log(sorted)
         res.json(sorted)
     } catch (error) {
         res.json(error)
