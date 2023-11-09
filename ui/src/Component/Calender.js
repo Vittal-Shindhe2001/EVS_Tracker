@@ -17,7 +17,7 @@ const Calender = (props) => {
     }
   }
 
-  // <strong>CustomerName:</strong>${info.event.extendedProps.customer} <br/>
+
 
   useEffect(() => {
     if (Array.isArray(props.bookings)) {
@@ -65,6 +65,7 @@ const Calender = (props) => {
       trigger: 'manual', // Use manual trigger to control show/hide manually
       customClass: 'popoverStyle',
       content: `<p>
+      <strong>CustomerName:</strong>${info.event.extendedProps.customer} <br/>
       <strong>StartDateTime:</strong>${info.event.start} <br/>
        <strong>EndDateTime:</strong>${info.event.end} <br/>
        <strong>Amount:</strong>${info.event.extendedProps.amount} <br/>

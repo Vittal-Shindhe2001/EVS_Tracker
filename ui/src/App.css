@@ -110,16 +110,13 @@
 
 
 .check {
-  margin-top: 5px;
-  margin-left: 200px;
   width: 2em;
   height: 1.5em;
   border: 9.15em solid currentColor;
   border-radius: 6.15em;
-  position: relative;
-  top: -37px;
-  left: 5px;
-
+  margin-top: 12px;
+  margin-left: -250px;
+ 
 }
 
 /* Page not found */
@@ -131,4 +128,9 @@
 }
 #pageNotFound{
   color: rgb(255, 6, 6);
+}
+
+.password{
+  margin-top:-30px;
+  margin-left: -101px;
 }

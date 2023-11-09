@@ -8,7 +8,7 @@ const RegistrationForm = (props) => {
   const handleUserTypeChange = (e) => {
     setUserType(e.target.value);
   };
-
+ 
   return (
     <div>
       <div className="form-check form-check-inline">
@@ -134,10 +134,11 @@ const CustomerRegistrationForm = (props) => {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                   />
-                  <input className="check" checked={check} type="checkbox" onChange={()=>{setChecke(!check)}}/>
+                
                   {messageError.password && (
                     <div className="text-danger">{messageError.password}</div>
                   )}
+                    <input className="check" checked={check} type="checkbox" onChange={()=>{setChecke(!check)}}/><p className="password">Show password</p>
                 </div>
                 <button type="submit" className="btn btn-primary">
                   Register
@@ -257,10 +258,11 @@ const StaffRegistrationForm = (props) => {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                   />
-                  <input className="check" checked={checkBox} type="checkbox" onChange={()=>{setChecke(!checkBox)}}/>
+                
                   {messageError.password && (
                     <div className="text-danger">{messageError.password}</div>
                   )}
+                    <input className="check" checked={checkBox} type="checkbox" onChange={()=>{setChecke(!checkBox)}}/><p className="password">Show password</p>
                 </div>
                 <div className="mb-3">
                   <label>Role</label>

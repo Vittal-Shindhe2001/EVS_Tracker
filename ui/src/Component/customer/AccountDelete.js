@@ -11,6 +11,7 @@ const AccountDelete = (props) => {
         dispatch(startGetUserInfo(token))
     }, [dispatch,token])
     const user = useSelector(state => state.user.data)
+    console.log(user);
     const formData = {
         password
     }

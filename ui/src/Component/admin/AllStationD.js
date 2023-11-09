@@ -1,4 +1,4 @@
-import React, { useEffect, useState,useCallback } from "react";
+import React, { useEffect, useState,useCallback,useRef} from "react";
 import { useDispatch, useSelector } from "react-redux";
 import debounce from 'lodash.debounce';
 import { startDeleteStation, startGetAllStations, setSearchStation } from "../../Actions/stationAction";
@@ -18,7 +18,11 @@ export const AllStationD = (props) => {
     const [search, setSearch] = useState('')
     const [display, setDisplay] = useState(false)
     const dispatch = useDispatch();
-
+    const stationSearch=useRef()
+    //focus on search field
+    useEffect(()=>{
+        stationSearch.current.focus()
+    },[])
     useEffect(() => {
         dispatch(startGetAllStations());
     }, [dispatch,search]);
@@ -59,7 +63,7 @@ export const AllStationD = (props) => {
         debounce((newValue) => {
             dispatch(setSearchStation(newValue))
         },3000), // The wait time in milliseconds
-        [dispatch])
+        [])
     
     return (
         <div className="card-container">
@@ -68,6 +72,7 @@ export const AllStationD = (props) => {
                 <div className="col-md-2">
                     <form>
                         <input
+                            ref={stationSearch}
                             className="form-control"
                             type="text"
                             value={search}
