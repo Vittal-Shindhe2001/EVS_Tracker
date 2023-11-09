@@ -55,7 +55,7 @@ bookingController.create = async (req, res) => {
                 host: 'smtp.gmail.com',
                 port: 587,
                 auth: {
-                    user: 'vitthalss2001@gmail.com',
+                    user: process.env.EMAIL,
                     pass: process.env.PASS_KEY
                 }
             });
@@ -71,7 +71,7 @@ bookingController.create = async (req, res) => {
                 <span >Start Date:${booking.endDateTime}</span>
                 `,
             })
-            console.log("Message sent: %s", info.messageId)
+           
             res.json(booking)
             const now = new Date()
             const timeUntilEnd = new Date(body.endDateTime).getTime() - now.getTime()

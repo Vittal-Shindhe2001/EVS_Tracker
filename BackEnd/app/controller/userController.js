@@ -1,7 +1,6 @@
 const bcrypt = require('bcrypt')
 const User = require('../models/user')
 const jwt = require('jsonwebtoken')
-const Booking = require('../models/booking')
 require('dotenv').config()
 
 const userController = {}

@@ -10,8 +10,6 @@ import 'bootstrap/dist/js/bootstrap.bundle';
 import 'leaflet/dist/leaflet.css'
 import 'react-toastify/dist/ReactToastify.css';
 
-
-
 const store = configureStore()
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -20,6 +18,7 @@ root.render(
       <App />
     </Provider>
   </BrowserRouter>
+
 );
 
 

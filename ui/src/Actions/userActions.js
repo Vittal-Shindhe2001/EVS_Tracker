@@ -15,7 +15,7 @@ export const startRegisterUser = (formdata, props) => {
                             autoClose: 1000,
                             theme: "colored",
                             });
-                        props.props.history.push('/login')
+                        props.history.push('/login')
 
                     }
                     else if (user.data._message) {
@@ -51,7 +51,6 @@ export const startGetUserInfo = (token) => {
             async () => {
                 try {
                     const user = await axios.get('user/info', { headers: { 'Authorization': token } })
-
                     dispatch(setUserInfo(user.data))
                 } catch (error) {
                     alert(error)

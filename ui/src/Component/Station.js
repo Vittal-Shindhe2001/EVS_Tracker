@@ -1,5 +1,5 @@
 
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState,useRef } from 'react'
 import { useDispatch } from 'react-redux'
 import { StartEditStation, startRegisterStation } from '../Actions/stationAction'
 import Location from './Location'
@@ -15,7 +15,11 @@ const Station = (props) => {
     const [chargingOptionId, setChargingOptionIds] = useState('')
     const [showMap, setShowMap] = useState(false)
     const [errors, setErrors] = useState({});
-
+    //useRef
+    const stationName=useRef()
+    useEffect(()=>{
+        stationName.current.focus()
+    },[])
     useEffect(() => {
         if (props.data) {
             setName(props.data.name || "")
@@ -128,6 +132,7 @@ const Station = (props) => {
                         <div>
                             <label className='formLabel'>Name</label>
                             <input
+                            ref={stationName}
                                 type="text"
                                 id="name"
                                 value={name}

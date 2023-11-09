@@ -1,4 +1,4 @@
-import { ADD_STATION, DELETE_STATION, EDIT_STATION, GET_STATION, SEARCH, SORTING_NAME, STAFF_STATION } from "../Actions/stationAction";
+import { ADD_STATION, DELETE_STATION, EDIT_STATION, GET_STATION, SEARCH, STAFF_STATION } from "../Actions/stationAction";
 const initialStations = { error: "",search:'',sort:[], data: [] }
 
 export const stationReducer = (state = initialStations, action) => {
@@ -31,9 +31,7 @@ export const stationReducer = (state = initialStations, action) => {
         case SEARCH:{
             return{...state,search:action.payload}
         }
-        case SORTING_NAME:{
-            return{...state,sort:[action.payload]}
-        }
+        
         default: {
             return { ...state }
         }

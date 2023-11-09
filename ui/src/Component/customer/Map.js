@@ -60,7 +60,7 @@ const Map = (props) => {
           style={containerStyle}
           center={currentLocation}
           zoom={15}
-          scrollWheelZoom={false}
+          scrollWheelZoom={true}
         >
           <TileLayer
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> '
