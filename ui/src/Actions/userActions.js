@@ -3,7 +3,7 @@ import axios from '../confi_axios/axios';
 export const GET_USER = 'GET_USER'
 export const USER_INFO = 'USER_INFO'
 export const STATION_USERS='STATION_USERS'
-export const startRegisterUser = (formdata, props) => {
+export const startRegisterUser = (formdata, history) => {
     return (dispatch) => {
         (
             async () => {
@@ -15,7 +15,7 @@ export const startRegisterUser = (formdata, props) => {
                             autoClose: 1000,
                             theme: "colored",
                             });
-                        props.history.push('/login')
+                        history.push('/login')
 
                     }
                     else if (user.data._message) {
