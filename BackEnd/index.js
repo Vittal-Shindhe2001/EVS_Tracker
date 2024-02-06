@@ -14,7 +14,7 @@ app.listen(port,()=>{
 })
 
 
-app.post('/', async (req, res) => {
+app.get('/', async (req, res) => {
     try {
         res.json("Server running"); // Sending a JSON response with a message
     } catch (error) {
