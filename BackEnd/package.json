@@ -8,5 +8,8 @@
     "jsonwebtoken": "^9.0.1",
     "mongoose": "^7.3.2",
     "nodemailer": "^6.9.4"
-  }
+  },
+ "scripts": {
+  "start": "nodemon index.js"
+ }
 }
