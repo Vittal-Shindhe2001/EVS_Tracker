@@ -12,3 +12,12 @@ app.use(router)
 app.listen(port,()=>{
     console.log('server running on port ',port);
 })
+
+
+app.post('/', async (req, res) => {
+    try {
+        res.json("Server running"); // Sending a JSON response with a message
+    } catch (error) {
+        res.json(error); // Sending the error message as JSON
+    }
+});
