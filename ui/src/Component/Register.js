@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { startRegisterUser } from "../Actions/userActions";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 const emailFormat = /^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
 const RegistrationForm = (props) => {
   const [userType, setUserType] = useState(" ");
@@ -40,6 +41,7 @@ const RegistrationForm = (props) => {
 
 const CustomerRegistrationForm = (props) => {
   const ref = useRef()
+  const history=useHistory()
   const dispatch = useDispatch();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -79,7 +81,7 @@ const CustomerRegistrationForm = (props) => {
     const error = formValidation();
 
     if (Object.keys(error).length === 0) {
-      dispatch(startRegisterUser(formData, props));
+      dispatch(startRegisterUser(formData, history));
     } else {
       setMessageError(error);
     }
@@ -154,6 +156,7 @@ const CustomerRegistrationForm = (props) => {
 
 const StaffRegistrationForm = (props) => {
   const dispatch = useDispatch();
+  const history=useHistory()
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -202,7 +205,7 @@ const StaffRegistrationForm = (props) => {
     const error = formValidation();
 
     if (Object.keys(error).length === 0) {
-      dispatch(startRegisterUser(formData, props));
+      dispatch(startRegisterUser(formData, history));
     } else {
       setMessageError(error);
     }
